@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=3 uid="uid://dr75iqv65238"]
+
+[ext_resource type="Script" path="res://Scripts/Defaults/PlayerEnitity.gd" id="1_wb4fh"]
+[ext_resource type="Texture2D" uid="uid://br0fpehpib3tv" path="res://icon.svg" id="2_6ly2v"]
+[ext_resource type="Script" path="res://Scripts/Defaults/CharacterStateMachine.gd" id="3_6mjdp"]
+[ext_resource type="Script" path="res://Scripts/States/IdleState.gd" id="4_aggig"]
+[ext_resource type="Script" path="res://Scripts/States/PossessionState.gd" id="5_rack5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dh0tf"]
+size = Vector2(26, 23)
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_g5s75"]
+
+[sub_resource type="Animation" id="Animation_whls7"]
+resource_name = "Idle"
+
+[sub_resource type="Animation" id="Animation_1bdic"]
+resource_name = "Run"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ruuf"]
+_data = {
+"Idle": SubResource("Animation_whls7"),
+"Run": SubResource("Animation_1bdic")
+}
+
+[node name="PlayerEnitity" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "animation_tree", "sprite_2d")]
+collision_mask = 3
+script = ExtResource("1_wb4fh")
+state_machine = NodePath("CharacterStateMachine")
+animation_tree = NodePath("AnimationTree")
+sprite_2d = NodePath("PlaceHolderSprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dh0tf")
+
+[node name="PlaceHolderSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.182)
+texture = ExtResource("2_6ly2v")
+
+[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state", "character", "animation_tree")]
+script = ExtResource("3_6mjdp")
+current_state = NodePath("Idle")
+character = NodePath("..")
+animation_tree = NodePath("../AnimationTree")
+
+[node name="Idle" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("4_aggig")
+
+[node name="Possession" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("5_rack5")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_g5s75")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationTree")
+libraries = {
+"": SubResource("AnimationLibrary_4ruuf")
+}

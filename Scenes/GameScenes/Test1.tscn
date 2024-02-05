@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://ib4xlod7bufl"]
+
+[ext_resource type="PackedScene" uid="uid://8ejq0yncv5il" path="res://Scenes/Entities/BackpackMan.tscn" id="1_yqem5"]
+[ext_resource type="PackedScene" uid="uid://lnfoibag74he" path="res://Scenes/Entities/Ball.tscn" id="2_5xotj"]
+
+[sub_resource type="Gradient" id="Gradient_u5fxn"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rwx05"]
+gradient = SubResource("Gradient_u5fxn")
+
+[node name="Test1" type="Node2D"]
+
+[node name="Court" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Court"]
+position = Vector2(-1.5, 2)
+scale = Vector2(2.23828, 314)
+texture = SubResource("GradientTexture1D_rwx05")
+
+[node name="Polygon2D" type="CollisionPolygon2D" parent="Court"]
+position = Vector2(1, -0.999992)
+polygon = PackedVector2Array(-288, -154, 287, -155, 288, 162, -290, 162, -289, -154, -314, -155, -313, 189, 324, 183, 322, -187, 221.298, -187, -314, -187, -314, -155)
+
+[node name="BackPackMan" parent="." instance=ExtResource("1_yqem5")]
+position = Vector2(-142, -7)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+
+[node name="Ball" parent="." instance=ExtResource("2_5xotj")]
+position = Vector2(-84, -6)

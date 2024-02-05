@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://lnfoibag74he"]
+
+[ext_resource type="Script" path="res://Scripts/Defaults/Ball.gd" id="1_xhe8s"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hoica"]
+bounce = 0.7
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h3tqo"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pa46p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_822gk"]
+radius = 11.0
+
+[node name="Node2D" type="RigidBody2D"]
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_hoica")
+gravity_scale = 0.0
+contact_monitor = true
+freeze_mode = 1
+script = ExtResource("1_xhe8s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_h3tqo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.556863, 0.556863, 0.556863, 1)
+position = Vector2(0, -5.96046e-07)
+scale = Vector2(14, 14)
+texture = SubResource("PlaceholderTexture2D_pa46p")
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_822gk")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
