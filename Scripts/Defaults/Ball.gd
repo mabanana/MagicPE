@@ -1,27 +1,46 @@
 extends RigidBody2D
-
+class_name Ball
+var possessed: bool
+var possesser: Marker2D
+const turn_speed: int = 350
+const spin_multiplier: int = 150
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	possessed = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-#	var c = move_and_collide(linear_velocity*delta)
-#	if c:
-#		print("Ball: ", c)
-#		var collider = c.get_collider()
-#		print("Ball: ", collider)
-#		if collider is RigidBody2D:
-#			apply_central_impulse(-linear_velocity*delta)
-#			apply_torque(2)
+	if possessed:
+		var direction: int = 0
+		if (possesser.global_position.x - global_position.x) > 0:
+			direction = 1
+		elif (possesser.global_position.x - global_position.x) < 0:
+			direction = -1
+		var speed = (possesser.global_position - global_position).length()
+		print("Ball: direction is ",direction)
+		rotation_degrees += direction * spin_multiplier * delta * speed
+		global_position.x = move_toward(global_position.x, possesser.global_position.x, turn_speed*delta)
+		global_position.y = move_toward(global_position.y, possesser.global_position.y, turn_speed*delta)
+		
+	
 
 func _on_area_2d_body_entered(body):
-	var velocity = body.global_position - global_position
-	velocity = velocity.normalized()
-	print("Ball: ",body.name, " has collided with ball at", velocity)
-	if body is CharacterBody2D:
-		apply_central_impulse(-velocity*500)
-		apply_torque(2)
+	print("Ball: detected body entering: ",body.name)
+
+
+		
+
+func possess(marker):
+	possessed = true
+	sleeping = true
+	assign_possess(marker)
+	
+func depossess():
+	possessed = true
+	sleeping = true
+	possesser = null
+
+func assign_possess(marker):
+	possesser = marker

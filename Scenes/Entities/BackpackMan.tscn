@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://8ejq0yncv5il"]
+[gd_scene load_steps=22 format=3 uid="uid://8ejq0yncv5il"]
 
 [ext_resource type="Script" path="res://Scripts/Defaults/PlayerEnitity.gd" id="1_ua6g4"]
 [ext_resource type="Texture2D" uid="uid://p8oangltkhq6" path="res://Assets/Sprites/reaper-player-idle-Sheet.png" id="2_hbupl"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Defaults/CharacterStateMachine.gd" id="3_4ie58"]
 [ext_resource type="Script" path="res://Scripts/States/IdleState.gd" id="4_3ntr3"]
 [ext_resource type="Script" path="res://Scripts/States/PossessionState.gd" id="5_qbww8"]
+[ext_resource type="Script" path="res://Scripts/Defaults/SoccerJoint.gd" id="7_awl14"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dh0tf"]
 size = Vector2(22, 25)
@@ -152,8 +153,10 @@ _data = {
 "Run": SubResource("Animation_1bdic")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfjei"]
+size = Vector2(30, 20)
+
 [node name="BackPackMan" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "animation_tree", "sprite_2d")]
-collision_mask = 3
 script = ExtResource("1_ua6g4")
 state_machine = NodePath("CharacterStateMachine")
 animation_tree = NodePath("AnimationTree")
@@ -182,7 +185,6 @@ script = ExtResource("5_qbww8")
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_g5s75")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/Move/blend_position = Vector2(0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -190,3 +192,15 @@ root_node = NodePath("../AnimationTree")
 libraries = {
 "": SubResource("AnimationLibrary_4ruuf")
 }
+
+[node name="SoccerJoint" type="Area2D" parent="." node_paths=PackedStringArray("ball_marker")]
+position = Vector2(0, 10)
+script = ExtResource("7_awl14")
+ball_marker = NodePath("BallMarker")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SoccerJoint"]
+shape = SubResource("RectangleShape2D_cfjei")
+
+[node name="BallMarker" type="Marker2D" parent="SoccerJoint"]
+
+[connection signal="area_entered" from="SoccerJoint" to="SoccerJoint" method="_on_area_entered"]

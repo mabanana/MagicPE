@@ -5,6 +5,7 @@ class_name PlayerEntity
 @export var state_machine: CharacterStateMachine
 @export var animation_tree: AnimationTree
 @export var sprite_2d: Sprite2D
+var facing: int = 1
 
 func _ready():
 	animation_tree.active = true
@@ -58,5 +59,7 @@ func check_facing(input_dir: int = 0):
 		dir = velocity.x
 	if dir < 0:
 		sprite_2d.flip_h = true
+		facing = -1
 	elif dir > 0:
 		sprite_2d.flip_h = false
+		facing = 1

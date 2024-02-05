@@ -12,10 +12,12 @@ bounce = 0.7
 [sub_resource type="CircleShape2D" id="CircleShape2D_822gk"]
 radius = 11.0
 
-[node name="Node2D" type="RigidBody2D"]
+[node name="Ball" type="RigidBody2D"]
 collision_layer = 2
+mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_hoica")
 gravity_scale = 0.0
+continuous_cd = 2
 contact_monitor = true
 freeze_mode = 1
 script = ExtResource("1_xhe8s")
@@ -30,7 +32,6 @@ scale = Vector2(14, 14)
 texture = SubResource("PlaceholderTexture2D_pa46p")
 
 [node name="Area2D" type="Area2D" parent="."]
-monitorable = false
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_822gk")
