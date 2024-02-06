@@ -158,6 +158,7 @@ _data = {
 size = Vector2(30, 20)
 
 [node name="BackPackMan" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "animation_tree", "sprite_2d")]
+collision_mask = 5
 script = ExtResource("1_ua6g4")
 state_machine = NodePath("CharacterStateMachine")
 animation_tree = NodePath("AnimationTree")
@@ -209,4 +210,6 @@ script = ExtResource("7_awl14")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SoccerComponent/SoccerJoint"]
 shape = SubResource("RectangleShape2D_cfjei")
 
+[connection signal="depossessed" from="SoccerComponent" to="CharacterStateMachine/Possession" method="_on_soccer_component_depossessed"]
+[connection signal="possessed" from="SoccerComponent" to="CharacterStateMachine/Idle" method="_on_soccer_component_possessed"]
 [connection signal="area_entered" from="SoccerComponent/SoccerJoint" to="SoccerComponent" method="_on_soccer_joint_area_entered"]

@@ -19,7 +19,6 @@ func _process(delta):
 		elif (possesser.global_position.x - global_position.x) < 0:
 			direction = -1
 		var speed = (possesser.global_position - global_position).length()
-		print("Ball: direction is ",direction)
 		rotation_degrees += direction * spin_multiplier * delta * speed
 		global_position.x = move_toward(global_position.x, possesser.global_position.x, turn_speed*delta)
 		global_position.y = move_toward(global_position.y, possesser.global_position.y, turn_speed*delta)
@@ -35,7 +34,7 @@ func possess(marker):
 	
 func depossess():
 	possessed = false
-	sleeping = true
+	sleeping = false
 	possesser = null
 
 func assign_possess(marker):

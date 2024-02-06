@@ -12,6 +12,7 @@ var y_direction: int
 var facing: int = 1
 
 
+
 func _ready():
 	animation_tree.active = true
 
@@ -19,14 +20,13 @@ func _physics_process(delta):
 	x_direction = Input.get_axis("ui_left", "ui_right")
 	y_direction = Input.get_axis("ui_up", "ui_down")
 	
-	if x_direction:
-		velocity.x = x_direction * move_speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, move_speed)
-	if y_direction:
-		velocity.y = y_direction * move_speed
-	else:
+	if not x_direction and not y_direction:
 		velocity.y = move_toward(velocity.x, 0, move_speed)
+		velocity.x = move_toward(velocity.x, 0, move_speed)
+	else:
+		velocity.x = x_direction
+		velocity.y = y_direction
+		velocity = velocity.normalized() * move_speed
 	print("PlayerEntity: Velocity(x,y):", velocity.x, velocity.y)
 	print("PlayerEntity: GlobalPosition(x,y):", global_position.x, global_position.y)
 	print("PlayerEntity: InputDirection: x",x_direction, ", y", y_direction)
@@ -60,10 +60,7 @@ func pass_blend_position():
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
-		if state_machine.current_state.name == "Idle":
-			state_machine.current_state.next_state = state_machine.states["Possession"]
-		if state_machine.current_state.name == "Possession":
-			state_machine.current_state.next_state = state_machine.states["Idle"]
+		pass
 	elif event.is_action_pressed("main_interact"):
 		print("PlayerEntity: MainInteract pressed")
 		state_machine.current_state.main_interact(state_machine.current_state.name)
