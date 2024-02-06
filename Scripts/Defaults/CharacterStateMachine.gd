@@ -12,9 +12,6 @@ func _ready():
 	for child in get_parent().get_children():
 		if child is AnimationTree:
 			animation_tree = child
-		elif child is GameComponent:
-			game_component = child
-	game_component.connect_state_machine(self)
 	
 	for child in get_children():
 		if child is State:

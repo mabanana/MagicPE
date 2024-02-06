@@ -25,7 +25,11 @@ func _process(delta):
 
 func _on_area_2d_body_entered(body):
 	print("Ball: detected body entering: ",body.name)
-
+	if body.name == "Court" and possesser:
+		apply_impulse(possesser.global_position - possesser.get_parent().global_position)
+		possesser.get_parent().depossess_ball()
+		
+		
 func possess(marker):
 	possessed = true
 	sleeping = true

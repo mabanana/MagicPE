@@ -39,7 +39,7 @@ func _ready():
 			state_machine = child
 		elif child is CharacterComponent:
 			char_component = child
-		
+	game_component.state_machine = state_machine
 
 func _physics_process(delta):
 	x_direction = Input.get_axis("ui_left", "ui_right")
@@ -85,13 +85,15 @@ func pass_blend_position():
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		pass
+	
 	elif event.is_action_pressed("main_interact"):
 		print("PlayerEntity: Main Interact pressed")
-		state_machine.current_state.main_interact(state_machine.current_state.name)
+		if state_machine.is_can_cast():
+			if char_component.spell_active:
+				char_component.spell_active = false
+				char_component.possession_spell()
+			game_component.main_interact(state_machine.current_state)
 	elif event.is_action_pressed("secondary_interact"):
-		char_component.spell_active = true
 		print("PlayerEntity: Secondary Interact pressed")
+		char_component.spell_active = not char_component.spell_active
 	state_machine.state_machine_input(event)
-
-func connect_character_component(incoming_character_component):
-	char_component = incoming_character_component

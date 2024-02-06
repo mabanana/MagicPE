@@ -10,11 +10,11 @@ var ball: RigidBody2D = null
 var ball_detect = preload("res://Scenes/Instances/soccer_joint.tscn")
 
 
-func main_interact(state_name):
-	if state_name == "Possession":
+func main_interact(state):
+	if state is PossessionState:
 		kick_ball(ball)
 		depossess_ball("Kick")
-	if state_name == "Idle":
+	if state is IdleState:
 		if not has_node("SoccerJoint"):
 			var inst = ball_detect.instantiate()
 			add_child(inst)
@@ -29,18 +29,19 @@ func kick_ball(b: RigidBody2D, is_shoot: bool = true):
 	if dir.normalized().x * get_parent().facing < 0:
 		dir *= 0.5
 		print("SoccerComponent: wrong facing")
-	b.apply_impulse(dir*kick_speed)
-	print("SoccerComponent: ", b.name, " was kicked.")
+	if b:
+		b.apply_impulse(dir*kick_speed)
+		print("SoccerComponent: ", b.name, " was kicked.")
 	#ball.apply_torque_impulse(kick_spin*dir.angle())
 
 func _on_soccer_joint_area_entered(area):
-	if area.get_parent() is Ball and ball == null and get_parent().state_machine.is_can_cast():
-		print("SoccerComponent:",area.get_parent().name, " possessed")
-		area.get_parent().possess(ball_marker)
-		if state_machine.current_state is IdleState:
-			state_machine.current_state.on_possession("Possess")
-		ball = area.get_parent()
-		print("SoccerJoint: has connected to ",area.get_parent().name)
+	var body = area.get_parent()
+	if body is Ball and state_machine.current_state is IdleState:
+		print("SoccerComponent:", body.name, " has been possessed")
+		body.possess(ball_marker)
+		state_machine.current_state.on_possession("Possess")
+		ball = body
+		print("SoccerComponent: has connected to ",body.name)
 
 func depossess_ball(anim_name = null):
 	if ball:
@@ -48,6 +49,3 @@ func depossess_ball(anim_name = null):
 		if state_machine.current_state is PossessionState:
 			state_machine.current_state.on_depossession(anim_name)
 	ball = null
-
-func connect_state_machine(incoming_state_machine):
-	state_machine = incoming_state_machine
