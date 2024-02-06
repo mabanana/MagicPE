@@ -18,6 +18,7 @@ func random_kick():
 
 
 func _on_timer_timeout():
-	possesser.get_parent().depossess_ball()
+	if possesser:
+		possesser.get_parent().depossess_ball()
 	print("FakeBall: queue free")
 	queue_free()
