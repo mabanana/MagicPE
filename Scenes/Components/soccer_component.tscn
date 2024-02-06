@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dywh1r04mpf0h"]
+
+[ext_resource type="Script" path="res://Scripts/Defaults/SoccerComponent.gd" id="1_asgjt"]
+
+[node name="SoccerComponent" type="Node2D" node_paths=PackedStringArray("ball_marker")]
+script = ExtResource("1_asgjt")
+ball_marker = NodePath("BallMarker")
+
+[node name="BallMarker" type="Marker2D" parent="."]
+position = Vector2(0, 10)

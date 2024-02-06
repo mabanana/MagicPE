@@ -5,10 +5,9 @@ const offset = 25
 @export var ball_marker = Marker2D
 @export var kick_spin: int = 500
 @export var kick_speed: int = 70
+var state_machine: CharacterStateMachine
 var ball: RigidBody2D = null
 var ball_detect = preload("res://Scenes/Instances/soccer_joint.tscn")
-signal possessed
-signal depossessed
 
 
 func main_interact(state_name):
@@ -38,13 +37,17 @@ func _on_soccer_joint_area_entered(area):
 	if area.get_parent() is Ball and ball == null and get_parent().state_machine.is_can_cast():
 		print("SoccerComponent:",area.get_parent().name, " possessed")
 		area.get_parent().possess(ball_marker)
-		emit_signal("possessed")
+		if state_machine.current_state is IdleState:
+			state_machine.current_state.on_possession("Possess")
 		ball = area.get_parent()
 		print("SoccerJoint: has connected to ",area.get_parent().name)
 
 func depossess_ball(anim_name = null):
 	if ball:
 		ball.depossess()
-		emit_signal("depossessed", anim_name)
+		if state_machine.current_state is PossessionState:
+			state_machine.current_state.on_depossession(anim_name)
 	ball = null
 
+func connect_state_machine(incoming_state_machine):
+	state_machine = incoming_state_machine

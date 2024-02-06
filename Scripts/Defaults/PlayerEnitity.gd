@@ -11,10 +11,8 @@ var x_direction: int
 var y_direction: int
 var facing: int = 1
 
-
-
 func _ready():
-	animation_tree.active = true
+	pass
 
 func _physics_process(delta):
 	x_direction = Input.get_axis("ui_left", "ui_right")
@@ -30,7 +28,6 @@ func _physics_process(delta):
 	#print("PlayerEntity: Velocity(x,y):", velocity.x, velocity.y)
 	#print("PlayerEntity: GlobalPosition(x,y):", global_position.x, global_position.y)
 	#print("PlayerEntity: InputDirection: x",x_direction, ", y", y_direction)
-	
 	check_facing()
 	pass_blend_position()
 	state_machine.state_machine_process(delta)
@@ -68,3 +65,6 @@ func _input(event):
 		char_component.spell_active = true
 		print("PlayerEntity: Secondary Interact pressed")
 	state_machine.state_machine_input(event)
+
+func connect_character_component(incoming_character_component):
+	char_component = incoming_character_component

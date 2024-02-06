@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0feahrh5khsl"]
+
+[ext_resource type="Script" path="res://Scripts/Defaults/CharacterStateMachine.gd" id="1_0orae"]
+[ext_resource type="Script" path="res://Scripts/States/IdleState.gd" id="2_b0i57"]
+[ext_resource type="Script" path="res://Scripts/States/PossessionState.gd" id="3_scj4f"]
+[ext_resource type="Script" path="res://Scripts/States/BusyState.gd" id="4_emps4"]
+
+[node name="CharacterStateMachine" type="Node"]
+script = ExtResource("1_0orae")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("2_b0i57")
+
+[node name="Possession" type="Node" parent="."]
+script = ExtResource("3_scj4f")
+
+[node name="Busy" type="Node" parent="."]
+script = ExtResource("4_emps4")
+can_move = false
+can_cast = false

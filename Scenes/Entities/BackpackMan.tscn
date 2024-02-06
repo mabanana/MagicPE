@@ -1,230 +1,20 @@
-[gd_scene load_steps=27 format=3 uid="uid://8ejq0yncv5il"]
+[gd_scene load_steps=8 format=3 uid="uid://8ejq0yncv5il"]
 
 [ext_resource type="Script" path="res://Scripts/Defaults/PlayerEnitity.gd" id="1_ua6g4"]
 [ext_resource type="Texture2D" uid="uid://p8oangltkhq6" path="res://Assets/Sprites/reaper-player-idle-Sheet.png" id="2_hbupl"]
-[ext_resource type="Texture2D" uid="uid://tiuqfsqy6bmf" path="res://Assets/Sprites/reaper-player-run-Sheet.png" id="2_i7e2x"]
-[ext_resource type="Script" path="res://Scripts/Defaults/CharacterStateMachine.gd" id="3_4ie58"]
-[ext_resource type="Script" path="res://Scripts/States/IdleState.gd" id="4_3ntr3"]
-[ext_resource type="Script" path="res://Scripts/States/PossessionState.gd" id="5_qbww8"]
-[ext_resource type="Script" path="res://Scripts/States/BusyState.gd" id="6_qosoc"]
-[ext_resource type="Script" path="res://Scripts/Defaults/SoccerComponent.gd" id="7_vc3ro"]
-[ext_resource type="Script" path="res://Scripts/Character/TricksterComponent.gd" id="9_vqxu1"]
+[ext_resource type="PackedScene" uid="uid://d0feahrh5khsl" path="res://Scenes/Components/soccer_state_machine.tscn" id="3_45bf4"]
+[ext_resource type="PackedScene" uid="uid://c05my18mguoq8" path="res://Scenes/Components/backpack_man_animation_tree.tscn" id="4_s2knk"]
+[ext_resource type="PackedScene" uid="uid://dywh1r04mpf0h" path="res://Scenes/Components/soccer_component.tscn" id="5_wg0rc"]
+[ext_resource type="PackedScene" uid="uid://dy8wxelhw7hmu" path="res://Scenes/Components/trickster_component.tscn" id="6_quygy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dh0tf"]
 size = Vector2(22, 25)
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_82efg"]
-animation = &"Kick"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vtfdq"]
-animation = &"Run"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_krlst"]
-animation = &"Run"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6wn8y"]
-animation = &"Idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x40ft"]
-animation = &"Run"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_adxrs"]
-animation = &"Run"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_l4xyg"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_vtfdq")
-blend_point_0/pos = Vector2(-1, 0)
-blend_point_1/node = SubResource("AnimationNodeAnimation_krlst")
-blend_point_1/pos = Vector2(1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_6wn8y")
-blend_point_2/pos = Vector2(0, 0)
-blend_point_3/node = SubResource("AnimationNodeAnimation_x40ft")
-blend_point_3/pos = Vector2(0, 1)
-blend_point_4/node = SubResource("AnimationNodeAnimation_adxrs")
-blend_point_4/pos = Vector2(0, -1)
-snap = Vector2(1, 1)
-blend_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0actf"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ys51h"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ncmlf"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_g5s75"]
-states/Kick/node = SubResource("AnimationNodeAnimation_82efg")
-states/Kick/position = Vector2(214, 32)
-states/Move/node = SubResource("AnimationNodeBlendSpace2D_l4xyg")
-states/Move/position = Vector2(370, 100)
-transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_0actf"), "Move", "Kick", SubResource("AnimationNodeStateMachineTransition_ys51h"), "Kick", "Move", SubResource("AnimationNodeStateMachineTransition_ncmlf")]
-
-[sub_resource type="Animation" id="Animation_whls7"]
-resource_name = "Idle"
-length = 0.8
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_hbupl")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Sprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-
-[sub_resource type="Animation" id="Animation_jjsfa"]
-resource_name = "Kick"
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_i7e2x")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Sprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [1, 0, 5]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../Sprite:skew")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.15, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [-0.277507, 0.0, 0.113446, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_ocxku"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_1bdic"]
-resource_name = "Run"
-length = 1.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_i7e2x")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Sprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ruuf"]
-_data = {
-"Idle": SubResource("Animation_whls7"),
-"Kick": SubResource("Animation_jjsfa"),
-"RESET": SubResource("Animation_ocxku"),
-"Run": SubResource("Animation_1bdic")
-}
 
 [node name="BackPackMan" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "animation_tree", "sprite_2d", "char_component")]
 collision_mask = 5
 script = ExtResource("1_ua6g4")
 state_machine = NodePath("CharacterStateMachine")
-animation_tree = NodePath("AnimationTree")
+animation_tree = NodePath("BackpackManAnimationTree")
 sprite_2d = NodePath("Sprite")
 char_component = NodePath("TricksterComponent")
 
@@ -233,48 +23,14 @@ position = Vector2(-1, 3.5)
 shape = SubResource("RectangleShape2D_dh0tf")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-skew = -0.277507
-texture = ExtResource("2_i7e2x")
-hframes = 6
+texture = ExtResource("2_hbupl")
+hframes = 4
 
-[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state", "character", "animation_tree", "game_component")]
-script = ExtResource("3_4ie58")
-current_state = NodePath("Idle")
-character = NodePath("..")
-animation_tree = NodePath("../AnimationTree")
-game_component = NodePath("../SoccerComponent")
+[node name="CharacterStateMachine" parent="." instance=ExtResource("3_45bf4")]
 
-[node name="Idle" type="Node" parent="CharacterStateMachine"]
-script = ExtResource("4_3ntr3")
+[node name="BackpackManAnimationTree" parent="." instance=ExtResource("4_s2knk")]
 
-[node name="Possession" type="Node" parent="CharacterStateMachine"]
-script = ExtResource("5_qbww8")
+[node name="SoccerComponent" parent="." instance=ExtResource("5_wg0rc")]
 
-[node name="Busy" type="Node" parent="CharacterStateMachine"]
-script = ExtResource("6_qosoc")
-can_move = false
-can_cast = false
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_g5s75")
-anim_player = NodePath("../AnimationPlayer")
-parameters/Move/blend_position = Vector2(0, 0)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../AnimationTree")
-libraries = {
-"": SubResource("AnimationLibrary_4ruuf")
-}
-
-[node name="SoccerComponent" type="Node2D" parent="." node_paths=PackedStringArray("ball_marker")]
-script = ExtResource("7_vc3ro")
-ball_marker = NodePath("BallMarker")
-
-[node name="BallMarker" type="Marker2D" parent="SoccerComponent"]
-position = Vector2(0, 10)
-
-[node name="TricksterComponent" type="Node" parent="."]
-script = ExtResource("9_vqxu1")
-
-[connection signal="depossessed" from="SoccerComponent" to="CharacterStateMachine/Possession" method="_on_soccer_component_depossessed"]
-[connection signal="possessed" from="SoccerComponent" to="CharacterStateMachine/Idle" method="_on_soccer_component_possessed"]
+[node name="TricksterComponent" parent="." instance=ExtResource("6_quygy")]
+duration = 3

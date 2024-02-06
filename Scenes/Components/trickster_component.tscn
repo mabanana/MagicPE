@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy8wxelhw7hmu"]
+
+[ext_resource type="Script" path="res://Scripts/Character/TricksterComponent.gd" id="1_f1pvb"]
+
+[node name="TricksterComponent" type="Node"]
+script = ExtResource("1_f1pvb")
+duration = 3

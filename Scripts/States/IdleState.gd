@@ -14,9 +14,11 @@ func state_process(delta):
 func on_enter():
 	playback.travel("Move")
 
-func on_possession():
-	next_state = get_parent().states["Possession"]
+func on_possession(anim_name):
+	next_state = get_parent().states["Busy"]
+	next_state.anim_name = anim_name
+	next_state.next_state = get_parent().states["Possession"]
 
-func _on_soccer_component_possessed():
-	on_possession()
+func _on_soccer_component_possessed(anim_name):
+	on_possession(anim_name)
 

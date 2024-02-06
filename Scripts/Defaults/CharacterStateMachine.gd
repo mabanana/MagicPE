@@ -1,16 +1,21 @@
 extends Node
-
 class_name CharacterStateMachine
 
 @export var current_state : State
 @export var character: CharacterBody2D
 @export var animation_tree: AnimationTree
 @export var game_component: GameComponent
-
 var states : Dictionary = {}
 
-
 func _ready():
+	character = get_parent()
+	for child in get_parent().get_children():
+		if child is AnimationTree:
+			animation_tree = child
+		elif child is GameComponent:
+			game_component = child
+	game_component.connect_state_machine(self)
+	
 	for child in get_children():
 		if child is State:
 				states[child.name] = child
@@ -19,6 +24,10 @@ func _ready():
 				child.playback = animation_tree["parameters/playback"]
 		else:
 			push_warning("CharacterStateMachine:  " + child.name + " is not a State for CharacterStateMachine")
+	current_state = states["Idle"]
+	
+		
+
 
 func state_machine_process(delta):
 	if current_state.next_state != null:

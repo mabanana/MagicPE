@@ -16,7 +16,7 @@ width = 1
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3st6"]
 radius = 11.0
 
-[node name="FakeBall" type="RigidBody2D"]
+[node name="FakeBall" type="RigidBody2D" node_paths=PackedStringArray("timer")]
 collision_layer = 2
 collision_mask = 6
 mass = 0.1
@@ -27,6 +27,7 @@ contact_monitor = true
 freeze_mode = 1
 linear_damp = 0.5
 script = ExtResource("1_abq5p")
+timer = NodePath("Timer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5gejx")
@@ -45,8 +46,6 @@ collision_mask = 5
 shape = SubResource("CircleShape2D_a3st6")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-autostart = true
+wait_time = 0.2
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
