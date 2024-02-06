@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://8ejq0yncv5il"]
+[gd_scene load_steps=23 format=3 uid="uid://8ejq0yncv5il"]
 
 [ext_resource type="Script" path="res://Scripts/Defaults/PlayerEnitity.gd" id="1_ua6g4"]
 [ext_resource type="Texture2D" uid="uid://p8oangltkhq6" path="res://Assets/Sprites/reaper-player-idle-Sheet.png" id="2_hbupl"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/States/IdleState.gd" id="4_3ntr3"]
 [ext_resource type="Script" path="res://Scripts/States/PossessionState.gd" id="5_qbww8"]
 [ext_resource type="Script" path="res://Scripts/Defaults/SoccerJoint.gd" id="7_awl14"]
+[ext_resource type="Script" path="res://Scripts/Defaults/SoccerComponent.gd" id="7_vc3ro"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dh0tf"]
 size = Vector2(22, 25)
@@ -170,11 +171,12 @@ shape = SubResource("RectangleShape2D_dh0tf")
 texture = ExtResource("2_hbupl")
 hframes = 4
 
-[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state", "character", "animation_tree")]
+[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state", "character", "animation_tree", "game_component")]
 script = ExtResource("3_4ie58")
 current_state = NodePath("Idle")
 character = NodePath("..")
 animation_tree = NodePath("../AnimationTree")
+game_component = NodePath("../SoccerComponent")
 
 [node name="Idle" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("4_3ntr3")
@@ -193,14 +195,18 @@ libraries = {
 "": SubResource("AnimationLibrary_4ruuf")
 }
 
-[node name="SoccerJoint" type="Area2D" parent="." node_paths=PackedStringArray("ball_marker")]
-position = Vector2(0, 10)
-script = ExtResource("7_awl14")
+[node name="SoccerComponent" type="Node2D" parent="." node_paths=PackedStringArray("ball_marker")]
+script = ExtResource("7_vc3ro")
 ball_marker = NodePath("BallMarker")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SoccerJoint"]
+[node name="BallMarker" type="Marker2D" parent="SoccerComponent"]
+position = Vector2(0, 10)
+
+[node name="SoccerJoint" type="Area2D" parent="SoccerComponent"]
+position = Vector2(0, 10)
+script = ExtResource("7_awl14")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SoccerComponent/SoccerJoint"]
 shape = SubResource("RectangleShape2D_cfjei")
 
-[node name="BallMarker" type="Marker2D" parent="SoccerJoint"]
-
-[connection signal="area_entered" from="SoccerJoint" to="SoccerJoint" method="_on_area_entered"]
+[connection signal="area_entered" from="SoccerComponent/SoccerJoint" to="SoccerComponent" method="_on_soccer_joint_area_entered"]

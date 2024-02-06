@@ -10,3 +10,6 @@ func state_input(event : InputEvent):
 		
 func _physics_process(delta):
 	pass
+
+func main_interact(state_name):
+	get_parent().game_component.main_interact(state_name)

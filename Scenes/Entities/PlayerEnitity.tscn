@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://dr75iqv65238"]
+[gd_scene load_steps=13 format=3 uid="uid://dr75iqv65238"]
 
 [ext_resource type="Script" path="res://Scripts/Defaults/PlayerEnitity.gd" id="1_wb4fh"]
 [ext_resource type="Texture2D" uid="uid://br0fpehpib3tv" path="res://icon.svg" id="2_6ly2v"]
 [ext_resource type="Script" path="res://Scripts/Defaults/CharacterStateMachine.gd" id="3_6mjdp"]
 [ext_resource type="Script" path="res://Scripts/States/IdleState.gd" id="4_aggig"]
 [ext_resource type="Script" path="res://Scripts/States/PossessionState.gd" id="5_rack5"]
+[ext_resource type="Script" path="res://Scripts/Defaults/GameComponents.gd" id="6_rkxgd"]
+[ext_resource type="Script" path="res://Scripts/Defaults/SoccerComponent.gd" id="7_bsa8r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dh0tf"]
 size = Vector2(26, 23)
@@ -58,3 +60,9 @@ root_node = NodePath("../AnimationTree")
 libraries = {
 "": SubResource("AnimationLibrary_4ruuf")
 }
+
+[node name="GameComponents" type="Node" parent="."]
+script = ExtResource("6_rkxgd")
+
+[node name="SoccerComponent" type="Node" parent="GameComponents"]
+script = ExtResource("7_bsa8r")

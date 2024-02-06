@@ -11,6 +11,8 @@ gradient = SubResource("Gradient_u5fxn")
 [node name="Test1" type="Node2D"]
 
 [node name="Court" type="RigidBody2D" parent="."]
+collision_layer = 4
+collision_mask = 7
 gravity_scale = 0.0
 freeze = true
 

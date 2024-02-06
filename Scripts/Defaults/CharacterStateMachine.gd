@@ -5,6 +5,7 @@ class_name CharacterStateMachine
 @export var current_state : State
 @export var character: CharacterBody2D
 @export var animation_tree: AnimationTree
+@export var game_component: GameComponent
 var states : Dictionary = {}
 
 
@@ -38,5 +39,5 @@ func switch_states(new_state):
 	current_state = new_state
 	current_state.on_enter()
 
-func _input(event: InputEvent):
+func state_machine_input(event: InputEvent):
 	current_state.state_input(event)

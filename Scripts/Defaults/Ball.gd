@@ -14,7 +14,7 @@ func _ready():
 func _process(delta):
 	if possessed:
 		var direction: int = 0
-		if (possesser.global_position.x - global_position.x) > 0:
+		if (possesser.global_position.x - global_position.x) >= 0:
 			direction = 1
 		elif (possesser.global_position.x - global_position.x) < 0:
 			direction = -1
@@ -23,14 +23,10 @@ func _process(delta):
 		rotation_degrees += direction * spin_multiplier * delta * speed
 		global_position.x = move_toward(global_position.x, possesser.global_position.x, turn_speed*delta)
 		global_position.y = move_toward(global_position.y, possesser.global_position.y, turn_speed*delta)
-		
-	
+
 
 func _on_area_2d_body_entered(body):
 	print("Ball: detected body entering: ",body.name)
-
-
-		
 
 func possess(marker):
 	possessed = true
@@ -38,7 +34,7 @@ func possess(marker):
 	assign_possess(marker)
 	
 func depossess():
-	possessed = true
+	possessed = false
 	sleeping = true
 	possesser = null
 
