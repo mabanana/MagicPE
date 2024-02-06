@@ -1,8 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://ib4xlod7bufl"]
+[gd_scene load_steps=11 format=3 uid="uid://ib4xlod7bufl"]
 
-[ext_resource type="PackedScene" uid="uid://8ejq0yncv5il" path="res://Scenes/Entities/BackpackMan.tscn" id="1_yqem5"]
+[ext_resource type="Script" path="res://Scenes/GameScenes/DefaultGameScene.gd" id="1_ktq6v"]
 [ext_resource type="PackedScene" uid="uid://lnfoibag74he" path="res://Scenes/Entities/Ball.tscn" id="2_5xotj"]
+[ext_resource type="PackedScene" uid="uid://dywh1r04mpf0h" path="res://Scenes/Components/soccer_component.tscn" id="2_ublvv"]
 [ext_resource type="Script" path="res://Scripts/Objects/TestGoal.gd" id="3_kci6y"]
+[ext_resource type="PackedScene" uid="uid://d0feahrh5khsl" path="res://Scenes/Components/soccer_state_machine.tscn" id="3_tmon2"]
+[ext_resource type="PackedScene" uid="uid://dy8wxelhw7hmu" path="res://Scenes/Components/trickster_component.tscn" id="4_v807p"]
+[ext_resource type="PackedScene" uid="uid://c05my18mguoq8" path="res://Scenes/Components/backpack_man_animation_tree.tscn" id="5_8hr0d"]
 
 [sub_resource type="Gradient" id="Gradient_u5fxn"]
 
@@ -13,6 +17,11 @@ gradient = SubResource("Gradient_u5fxn")
 size = Vector2(12, 93)
 
 [node name="Test1" type="Node2D"]
+script = ExtResource("1_ktq6v")
+game_component = ExtResource("2_ublvv")
+state_machine_component = ExtResource("3_tmon2")
+character_component = ExtResource("4_v807p")
+animation_tree_component = ExtResource("5_8hr0d")
 
 [node name="Court" type="RigidBody2D" parent="."]
 collision_layer = 4
@@ -28,9 +37,6 @@ texture = SubResource("GradientTexture1D_rwx05")
 [node name="Polygon2D" type="CollisionPolygon2D" parent="Court"]
 position = Vector2(1, -0.999992)
 polygon = PackedVector2Array(-288, -154, 287, -155, 288, 162, -290, 162, -289, -154, -314, -155, -313, 189, 324, 183, 322, -187, 221.298, -187, -314, -187, -314, -155)
-
-[node name="BackPackMan" parent="." instance=ExtResource("1_yqem5")]
-position = Vector2(-142, -7)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.8, 1.8)
@@ -57,5 +63,8 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(-196, 0)
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

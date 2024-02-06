@@ -2,17 +2,44 @@ extends CharacterBody2D
 class_name PlayerEntity
 
 @export var move_speed: int = 200
-@export var state_machine: CharacterStateMachine
-@export var animation_tree: AnimationTree
 @export var sprite_2d: Sprite2D
-@export var char_component: CharacterComponent
+
+var state_machine: CharacterStateMachine
+var animation_tree: AnimationTree
+var char_component: CharacterComponent
+var game_component: GameComponent
+
+var char_component_scene: PackedScene
+var animation_tree_scene: PackedScene
+var state_machine_scene: PackedScene
+var game_component_scene: PackedScene
+
 var blend_position: Vector2
 var x_direction: int
 var y_direction: int
 var facing: int = 1
 
 func _ready():
-	pass
+	var component_scene_list = [
+	game_component_scene, 
+	animation_tree_scene,
+	char_component_scene, 
+	state_machine_scene ]
+
+	for scene in component_scene_list:
+		var inst = scene.instantiate()
+		add_child(inst)
+	
+	for child in get_children():
+		if child is AnimationTree:
+			animation_tree = child
+		elif child is GameComponent:
+			game_component = child
+		elif child is CharacterStateMachine:
+			state_machine = child
+		elif child is CharacterComponent:
+			char_component = child
+		
 
 func _physics_process(delta):
 	x_direction = Input.get_axis("ui_left", "ui_right")

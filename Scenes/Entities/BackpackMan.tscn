@@ -1,22 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://8ejq0yncv5il"]
+[gd_scene load_steps=4 format=3 uid="uid://8ejq0yncv5il"]
 
 [ext_resource type="Script" path="res://Scripts/Defaults/PlayerEnitity.gd" id="1_ua6g4"]
 [ext_resource type="Texture2D" uid="uid://p8oangltkhq6" path="res://Assets/Sprites/reaper-player-idle-Sheet.png" id="2_hbupl"]
-[ext_resource type="PackedScene" uid="uid://d0feahrh5khsl" path="res://Scenes/Components/soccer_state_machine.tscn" id="3_45bf4"]
-[ext_resource type="PackedScene" uid="uid://c05my18mguoq8" path="res://Scenes/Components/backpack_man_animation_tree.tscn" id="4_s2knk"]
-[ext_resource type="PackedScene" uid="uid://dywh1r04mpf0h" path="res://Scenes/Components/soccer_component.tscn" id="5_wg0rc"]
-[ext_resource type="PackedScene" uid="uid://dy8wxelhw7hmu" path="res://Scenes/Components/trickster_component.tscn" id="6_quygy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dh0tf"]
 size = Vector2(22, 25)
 
-[node name="BackPackMan" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "animation_tree", "sprite_2d", "char_component")]
+[node name="BackPackMan" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d")]
 collision_mask = 5
 script = ExtResource("1_ua6g4")
-state_machine = NodePath("CharacterStateMachine")
-animation_tree = NodePath("BackpackManAnimationTree")
 sprite_2d = NodePath("Sprite")
-char_component = NodePath("TricksterComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 3.5)
@@ -25,12 +18,4 @@ shape = SubResource("RectangleShape2D_dh0tf")
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_hbupl")
 hframes = 4
-
-[node name="CharacterStateMachine" parent="." instance=ExtResource("3_45bf4")]
-
-[node name="BackpackManAnimationTree" parent="." instance=ExtResource("4_s2knk")]
-
-[node name="SoccerComponent" parent="." instance=ExtResource("5_wg0rc")]
-
-[node name="TricksterComponent" parent="." instance=ExtResource("6_quygy")]
-duration = 3
+frame = 3
