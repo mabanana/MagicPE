@@ -7,11 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://d0feahrh5khsl" path="res://Scenes/Components/soccer_state_machine.tscn" id="3_tmon2"]
 [ext_resource type="PackedScene" uid="uid://dy8wxelhw7hmu" path="res://Scenes/Components/trickster_component.tscn" id="4_v807p"]
 [ext_resource type="PackedScene" uid="uid://c05my18mguoq8" path="res://Scenes/Components/backpack_man_animation_tree.tscn" id="5_8hr0d"]
+[ext_resource type="Theme" uid="uid://eqmbgyl3xufq" path="res://Assets/UI/kenneyUI-yellow.tres" id="8_3ck8v"]
 
-[sub_resource type="Gradient" id="Gradient_u5fxn"]
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_rwx05"]
-gradient = SubResource("Gradient_u5fxn")
+[sub_resource type="CanvasTexture" id="CanvasTexture_go6d0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_euq7t"]
 size = Vector2(12, 93)
@@ -30,9 +28,9 @@ gravity_scale = 0.0
 freeze = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Court"]
-position = Vector2(-1.5, 2)
-scale = Vector2(2.23828, 314)
-texture = SubResource("GradientTexture1D_rwx05")
+modulate = Color(0.941176, 0.796078, 0.631373, 1)
+scale = Vector2(578, 314)
+texture = SubResource("CanvasTexture_go6d0")
 
 [node name="Polygon2D" type="CollisionPolygon2D" parent="Court"]
 position = Vector2(1, -0.999992)
@@ -58,13 +56,43 @@ position = Vector2(258, 1)
 color = Color(1, 0.443137, 1, 1)
 polygon = PackedVector2Array(23, -48, 23, 45, 35, 45, 35, -48)
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 position = Vector2(-216, -27)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+theme = ExtResource("8_3ck8v")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -441.0
+offset_bottom = 18.0
+grow_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/PanelContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+alignment = 1
+
+[node name="Exit Game" type="Button" parent="CanvasLayer/Control/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Exit Game"
+
+[node name="Pause" type="Button" parent="CanvasLayer/Control/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Pause"
+
+[node name="Button3" type="Button" parent="CanvasLayer/Control/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Character Information"
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

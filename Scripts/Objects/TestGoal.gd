@@ -14,4 +14,4 @@ func _process(delta):
 func _on_body_entered(body):
 	if body is Ball and not body is FakeBall:
 		var text = goal_text.instantiate()
-		get_parent().get_node("Control").add_child(text)
+		get_parent().get_node("CanvasLayer").add_child(text)
