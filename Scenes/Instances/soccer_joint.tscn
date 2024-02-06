@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctl07hyhm8duk"]
+
+[ext_resource type="Script" path="res://Scripts/Defaults/SoccerJoint.gd" id="1_3koy2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfjei"]
+size = Vector2(30, 20)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o7bd4"]
+
+[node name="SoccerJoint" type="Area2D"]
+position = Vector2(0, 10)
+script = ExtResource("1_3koy2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cfjei")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.239216, 1, 0.760784, 0.219608)
+position = Vector2(4.76837e-07, 0)
+scale = Vector2(30, 20)
+texture = SubResource("PlaceholderTexture2D_o7bd4")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

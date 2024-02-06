@@ -21,6 +21,7 @@ gravity_scale = 0.0
 continuous_cd = 2
 contact_monitor = true
 freeze_mode = 1
+linear_damp = 1.0
 script = ExtResource("1_xhe8s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

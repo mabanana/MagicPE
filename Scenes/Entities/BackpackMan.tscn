@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://8ejq0yncv5il"]
+[gd_scene load_steps=27 format=3 uid="uid://8ejq0yncv5il"]
 
 [ext_resource type="Script" path="res://Scripts/Defaults/PlayerEnitity.gd" id="1_ua6g4"]
 [ext_resource type="Texture2D" uid="uid://p8oangltkhq6" path="res://Assets/Sprites/reaper-player-idle-Sheet.png" id="2_hbupl"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://Scripts/States/IdleState.gd" id="4_3ntr3"]
 [ext_resource type="Script" path="res://Scripts/States/PossessionState.gd" id="5_qbww8"]
 [ext_resource type="Script" path="res://Scripts/States/BusyState.gd" id="6_qosoc"]
-[ext_resource type="Script" path="res://Scripts/Defaults/SoccerJoint.gd" id="7_awl14"]
 [ext_resource type="Script" path="res://Scripts/Defaults/SoccerComponent.gd" id="7_vc3ro"]
 [ext_resource type="Script" path="res://Scripts/Character/TricksterComponent.gd" id="9_vqxu1"]
 
@@ -104,6 +103,59 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3]
 }
 
+[sub_resource type="Animation" id="Animation_jjsfa"]
+resource_name = "Kick"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_i7e2x")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 0, 5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Sprite:skew")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.277507, 0.0, 0.113446, 0.0]
+}
+
 [sub_resource type="Animation" id="Animation_ocxku"]
 length = 0.001
 tracks/0/type = "value"
@@ -160,46 +212,6 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
-[sub_resource type="Animation" id="Animation_jjsfa"]
-resource_name = "Kick"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_hbupl")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Sprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4ruuf"]
 _data = {
 "Idle": SubResource("Animation_whls7"),
@@ -207,9 +219,6 @@ _data = {
 "RESET": SubResource("Animation_ocxku"),
 "Run": SubResource("Animation_1bdic")
 }
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfjei"]
-size = Vector2(30, 20)
 
 [node name="BackPackMan" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "animation_tree", "sprite_2d", "char_component")]
 collision_mask = 5
@@ -224,8 +233,9 @@ position = Vector2(-1, 3.5)
 shape = SubResource("RectangleShape2D_dh0tf")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_hbupl")
-hframes = 4
+skew = -0.277507
+texture = ExtResource("2_i7e2x")
+hframes = 6
 
 [node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state", "character", "animation_tree", "game_component")]
 script = ExtResource("3_4ie58")
@@ -263,16 +273,8 @@ ball_marker = NodePath("BallMarker")
 [node name="BallMarker" type="Marker2D" parent="SoccerComponent"]
 position = Vector2(0, 10)
 
-[node name="SoccerJoint" type="Area2D" parent="SoccerComponent"]
-position = Vector2(0, 10)
-script = ExtResource("7_awl14")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SoccerComponent/SoccerJoint"]
-shape = SubResource("RectangleShape2D_cfjei")
-
 [node name="TricksterComponent" type="Node" parent="."]
 script = ExtResource("9_vqxu1")
 
 [connection signal="depossessed" from="SoccerComponent" to="CharacterStateMachine/Possession" method="_on_soccer_component_depossessed"]
 [connection signal="possessed" from="SoccerComponent" to="CharacterStateMachine/Idle" method="_on_soccer_component_possessed"]
-[connection signal="area_entered" from="SoccerComponent/SoccerJoint" to="SoccerComponent" method="_on_soccer_joint_area_entered"]

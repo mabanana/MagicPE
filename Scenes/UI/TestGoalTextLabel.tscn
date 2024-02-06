@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5mxe7aogpjd"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/TestGoalTextLabel.gd" id="1_4bi0q"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4bi0q")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 26.0
+scale = Vector2(5, 5)
+text = "GOAL!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

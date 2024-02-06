@@ -23,7 +23,6 @@ func _process(delta):
 		global_position.x = move_toward(global_position.x, possesser.global_position.x, turn_speed*delta)
 		global_position.y = move_toward(global_position.y, possesser.global_position.y, turn_speed*delta)
 
-
 func _on_area_2d_body_entered(body):
 	print("Ball: detected body entering: ",body.name)
 

@@ -1,12 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://ib4xlod7bufl"]
+[gd_scene load_steps=7 format=3 uid="uid://ib4xlod7bufl"]
 
 [ext_resource type="PackedScene" uid="uid://8ejq0yncv5il" path="res://Scenes/Entities/BackpackMan.tscn" id="1_yqem5"]
 [ext_resource type="PackedScene" uid="uid://lnfoibag74he" path="res://Scenes/Entities/Ball.tscn" id="2_5xotj"]
+[ext_resource type="Script" path="res://Scripts/Objects/TestGoal.gd" id="3_kci6y"]
 
 [sub_resource type="Gradient" id="Gradient_u5fxn"]
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_rwx05"]
 gradient = SubResource("Gradient_u5fxn")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_euq7t"]
+size = Vector2(12, 93)
 
 [node name="Test1" type="Node2D"]
 
@@ -33,3 +37,25 @@ zoom = Vector2(1.8, 1.8)
 
 [node name="Ball" parent="." instance=ExtResource("2_5xotj")]
 position = Vector2(0, 1)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("3_kci6y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(287, -0.5)
+shape = SubResource("RectangleShape2D_euq7t")
+
+[node name="Polygon2D" type="Polygon2D" parent="Area2D"]
+position = Vector2(258, 1)
+color = Color(1, 0.443137, 1, 1)
+polygon = PackedVector2Array(23, -48, 23, 45, 35, 45, 35, -48)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
