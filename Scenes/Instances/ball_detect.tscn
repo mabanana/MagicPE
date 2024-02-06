@@ -1,15 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://ctl07hyhm8duk"]
 
-[ext_resource type="Script" path="res://Scripts/Defaults/SoccerJoint.gd" id="1_3koy2"]
+[ext_resource type="Script" path="res://Scripts/Defaults/BallDetect.gd" id="1_w1fpv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfjei"]
 size = Vector2(30, 20)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o7bd4"]
 
-[node name="SoccerJoint" type="Area2D"]
+[node name="BallDetect" type="Area2D"]
 position = Vector2(0, 10)
-script = ExtResource("1_3koy2")
+script = ExtResource("1_w1fpv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cfjei")

@@ -7,7 +7,7 @@ const offset = 25
 @export var kick_speed: int = 70
 var state_machine: CharacterStateMachine
 var ball: RigidBody2D = null
-var ball_detect = preload("res://Scenes/Instances/soccer_joint.tscn")
+var ball_detect = preload("res://Scenes/Instances/ball_detect.tscn")
 
 
 func main_interact(state):
@@ -15,10 +15,9 @@ func main_interact(state):
 		kick_ball(ball)
 		depossess_ball("Kick")
 	if state is IdleState:
-		if not has_node("SoccerJoint"):
+		if not has_node("BallDetect"):
 			var inst = ball_detect.instantiate()
 			add_child(inst)
-
 
 func _process(delta):
 	ball_marker.position.x = get_parent().facing * offset
@@ -34,7 +33,7 @@ func kick_ball(b: RigidBody2D, is_shoot: bool = true):
 		print("SoccerComponent: ", b.name, " was kicked.")
 	#ball.apply_torque_impulse(kick_spin*dir.angle())
 
-func _on_soccer_joint_area_entered(area):
+func _on_ball_entered(area):
 	var body = area.get_parent()
 	if body is Ball and state_machine.current_state is IdleState:
 		print("SoccerComponent:", body.name, " has been possessed")
