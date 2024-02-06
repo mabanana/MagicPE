@@ -6,6 +6,7 @@ class_name CharacterStateMachine
 @export var character: CharacterBody2D
 @export var animation_tree: AnimationTree
 @export var game_component: GameComponent
+
 var states : Dictionary = {}
 
 

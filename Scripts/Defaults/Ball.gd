@@ -8,7 +8,7 @@ const spin_multiplier: int = 150
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	possessed = false
-
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

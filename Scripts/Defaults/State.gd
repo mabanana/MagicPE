@@ -20,6 +20,6 @@ func on_enter():
 
 func on_exit():
 	pass
-
+	
 func main_interact(state_name: String):
-	pass
+	get_parent().game_component.main_interact(state_name)

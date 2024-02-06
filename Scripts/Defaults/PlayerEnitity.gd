@@ -5,7 +5,7 @@ class_name PlayerEntity
 @export var state_machine: CharacterStateMachine
 @export var animation_tree: AnimationTree
 @export var sprite_2d: Sprite2D
-
+@export var char_component: CharacterComponent
 var blend_position: Vector2
 var x_direction: int
 var y_direction: int
@@ -27,9 +27,9 @@ func _physics_process(delta):
 		velocity.x = x_direction
 		velocity.y = y_direction
 		velocity = velocity.normalized() * move_speed
-	print("PlayerEntity: Velocity(x,y):", velocity.x, velocity.y)
-	print("PlayerEntity: GlobalPosition(x,y):", global_position.x, global_position.y)
-	print("PlayerEntity: InputDirection: x",x_direction, ", y", y_direction)
+	#print("PlayerEntity: Velocity(x,y):", velocity.x, velocity.y)
+	#print("PlayerEntity: GlobalPosition(x,y):", global_position.x, global_position.y)
+	#print("PlayerEntity: InputDirection: x",x_direction, ", y", y_direction)
 	
 	check_facing()
 	pass_blend_position()
@@ -62,8 +62,9 @@ func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		pass
 	elif event.is_action_pressed("main_interact"):
-		print("PlayerEntity: MainInteract pressed")
+		print("PlayerEntity: Main Interact pressed")
 		state_machine.current_state.main_interact(state_machine.current_state.name)
 	elif event.is_action_pressed("secondary_interact"):
-		print("PlayerEntity: MainInteract pressed")
+		char_component.spell_active = true
+		print("PlayerEntity: Secondary Interact pressed")
 	state_machine.state_machine_input(event)

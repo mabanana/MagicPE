@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://bprg7u0bltltx"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/FakeBall.gd" id="1_abq5p"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vqjw5"]
+bounce = 0.7
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5gejx"]
+
+[sub_resource type="Gradient" id="Gradient_yhpdw"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g555h"]
+gradient = SubResource("Gradient_yhpdw")
+width = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a3st6"]
+radius = 11.0
+
+[node name="FakeBall" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 6
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_vqjw5")
+gravity_scale = 0.0
+continuous_cd = 2
+contact_monitor = true
+freeze_mode = 1
+script = ExtResource("1_abq5p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5gejx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.556863, 0.556863, 0.556863, 1)
+position = Vector2(0, -5.96046e-07)
+scale = Vector2(14, 14)
+texture = SubResource("GradientTexture1D_g555h")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 5
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_a3st6")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -19,3 +19,4 @@ func on_possession():
 
 func _on_soccer_component_possessed():
 	on_possession()
+
