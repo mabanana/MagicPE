@@ -27,11 +27,9 @@ _data = {
 "Run": SubResource("Animation_1bdic")
 }
 
-[node name="PlayerEnitity" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "animation_tree", "sprite_2d")]
+[node name="PlayerEnitity" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d")]
 collision_mask = 3
 script = ExtResource("1_wb4fh")
-state_machine = NodePath("CharacterStateMachine")
-animation_tree = NodePath("AnimationTree")
 sprite_2d = NodePath("PlaceHolderSprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

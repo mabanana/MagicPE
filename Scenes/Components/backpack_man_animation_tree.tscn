@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c05my18mguoq8"]
+[gd_scene load_steps=23 format=3 uid="uid://cu1i4mg6turmk"]
 
 [ext_resource type="Texture2D" uid="uid://p8oangltkhq6" path="res://Assets/Sprites/reaper-player-idle-Sheet.png" id="1_2c18y"]
 [ext_resource type="Texture2D" uid="uid://tiuqfsqy6bmf" path="res://Assets/Sprites/reaper-player-run-Sheet.png" id="2_alf7m"]

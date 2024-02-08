@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GameMode" load_steps=5 format=3 uid="uid://bcw6qgywnh5sj"]
+
+[ext_resource type="PackedScene" uid="uid://dywh1r04mpf0h" path="res://Scenes/Components/soccer_component.tscn" id="1_8neqe"]
+[ext_resource type="Script" path="res://Scripts/Resources/GameMode.gd" id="1_cn5kc"]
+[ext_resource type="Resource" uid="uid://b5gulcgmgfwu5" path="res://Resources/SoccerBall.tres" id="2_ratat"]
+[ext_resource type="PackedScene" uid="uid://d0feahrh5khsl" path="res://Scenes/Components/soccer_state_machine.tscn" id="3_vypx5"]
+
+[resource]
+script = ExtResource("1_cn5kc")
+name = "Soccer"
+game_component = ExtResource("1_8neqe")
+state_machine = ExtResource("3_vypx5")
+game_entities = Array[Resource("res://Scripts/Resources/GameEntity.gd")]([ExtResource("2_ratat")])

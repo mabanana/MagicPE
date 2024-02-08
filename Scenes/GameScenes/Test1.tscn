@@ -1,12 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://ib4xlod7bufl"]
+[gd_scene load_steps=7 format=3 uid="uid://ib4xlod7bufl"]
 
 [ext_resource type="Script" path="res://Scenes/GameScenes/DefaultGameScene.gd" id="1_ktq6v"]
 [ext_resource type="PackedScene" uid="uid://lnfoibag74he" path="res://Scenes/Entities/Ball.tscn" id="2_5xotj"]
-[ext_resource type="PackedScene" uid="uid://dywh1r04mpf0h" path="res://Scenes/Components/soccer_component.tscn" id="2_ublvv"]
 [ext_resource type="Script" path="res://Scripts/Objects/TestGoal.gd" id="3_kci6y"]
-[ext_resource type="PackedScene" uid="uid://d0feahrh5khsl" path="res://Scenes/Components/soccer_state_machine.tscn" id="3_tmon2"]
-[ext_resource type="PackedScene" uid="uid://dy8wxelhw7hmu" path="res://Scenes/Components/trickster_component.tscn" id="4_v807p"]
-[ext_resource type="PackedScene" uid="uid://c05my18mguoq8" path="res://Scenes/Components/backpack_man_animation_tree.tscn" id="5_8hr0d"]
 [ext_resource type="Theme" uid="uid://eqmbgyl3xufq" path="res://Assets/UI/kenneyUI-yellow.tres" id="8_3ck8v"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_go6d0"]
@@ -16,10 +12,6 @@ size = Vector2(12, 93)
 
 [node name="Test1" type="Node2D"]
 script = ExtResource("1_ktq6v")
-game_component = ExtResource("2_ublvv")
-state_machine_component = ExtResource("3_tmon2")
-character_component = ExtResource("4_v807p")
-animation_tree_component = ExtResource("5_8hr0d")
 
 [node name="Court" type="RigidBody2D" parent="."]
 collision_layer = 4
