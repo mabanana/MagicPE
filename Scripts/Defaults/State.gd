@@ -20,8 +20,12 @@ func on_enter():
 
 func on_exit():
 	pass
+
+func on_main_interact():
+	pass
 	
 func main_interact():
 	get_parent().game_component.main_interact(self)
 	if can_cast:
 		get_parent().char_component.main_interact(self)
+	on_main_interact()

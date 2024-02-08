@@ -8,7 +8,8 @@ func state_input(event : InputEvent):
 	pass
 		
 func state_process(delta):
-	pass
+	if not get_parent().game_component.ball:
+		next_state = get_parent().states["Idle"]
 
 func on_depossession(anim_name = null):
 	next_state = get_parent().states["Busy"]
@@ -17,3 +18,4 @@ func on_depossession(anim_name = null):
 
 func _on_soccer_component_depossessed(anim_name):
 	on_depossession(anim_name)
+

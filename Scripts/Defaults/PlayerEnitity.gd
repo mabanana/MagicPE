@@ -54,9 +54,11 @@ func _physics_process(delta):
 		y_direction = 0
 
 	if x_direction or y_direction:
+		var acc = (sqrt(0.5)*acceleration) if (x_direction and y_direction) else acceleration 
 		velocity.x = move_toward(velocity.x, x_direction * move_speed, acceleration)
 		velocity.y = move_toward(velocity.y, y_direction * move_speed, acceleration)
-		#velocity = velocity.normalized() * move_speed
+		var curr_speed = min(velocity.length(),move_speed)
+		velocity = velocity.normalized() * curr_speed
 	else:
 		velocity.y = move_toward(velocity.y, 0, decceleration)
 		velocity.x = move_toward(velocity.x, 0, decceleration)

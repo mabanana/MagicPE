@@ -35,16 +35,15 @@ func kick_ball(b: RigidBody2D, is_shoot: bool = true):
 
 func _on_ball_entered(area):
 	var body = area.get_parent()
-	if body is Ball and state_machine.current_state is IdleState:
+	if body is Ball :
 		print("SoccerComponent:", body.name, " has been possessed")
 		body.possess(ball_marker)
-		state_machine.current_state.on_possession("Possess")
 		ball = body
 		print("SoccerComponent: has connected to ",body.name)
 
 func depossess_ball(anim_name = null):
 	if ball:
 		ball.depossess()
-	if state_machine.current_state is PossessionState:
-		state_machine.current_state.on_depossession(anim_name)
+#	if state_machine.current_state is PossessionState:
+#		state_machine.current_state.on_depossession(anim_name)
 	ball = null
