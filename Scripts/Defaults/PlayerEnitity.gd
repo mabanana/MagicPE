@@ -2,6 +2,8 @@ extends CharacterBody2D
 class_name PlayerEntity
 
 @export var move_speed: int = 200
+@export var acceleration: int = 60
+@export var decceleration: int = 20
 @export var sprite_2d: Sprite2D
 
 var state_machine: CharacterStateMachine
@@ -44,15 +46,20 @@ func _ready():
 	state_machine.char_component = char_component
 
 func _physics_process(delta):
-	x_direction = Input.get_axis("ui_left", "ui_right")
-	y_direction = Input.get_axis("ui_up", "ui_down")
-	if state_machine.is_can_move() and (x_direction or y_direction):
-		velocity.x = x_direction
-		velocity.y = y_direction
-		velocity = velocity.normalized() * move_speed
+	if state_machine.is_can_move():
+		x_direction = Input.get_axis("ui_left", "ui_right")
+		y_direction = Input.get_axis("ui_up", "ui_down")
 	else:
-		velocity.y = move_toward(velocity.x, 0, move_speed)
-		velocity.x = move_toward(velocity.x, 0, move_speed)
+		x_direction = 0
+		y_direction = 0
+
+	if x_direction or y_direction:
+		velocity.x = move_toward(velocity.x, x_direction * move_speed, acceleration)
+		velocity.y = move_toward(velocity.y, y_direction * move_speed, acceleration)
+		#velocity = velocity.normalized() * move_speed
+	else:
+		velocity.y = move_toward(velocity.y, 0, decceleration)
+		velocity.x = move_toward(velocity.x, 0, decceleration)
 	#print("PlayerEntity: Velocity(x,y):", velocity.x, velocity.y)
 	#print("PlayerEntity: GlobalPosition(x,y):", global_position.x, global_position.y)
 	#print("PlayerEntity: InputDirection: x",x_direction, ", y", y_direction)
@@ -78,10 +85,10 @@ func check_facing():
 		facing = 1
 
 func pass_blend_position():
-	blend_position.x = x_direction
-	blend_position.y = y_direction
+	blend_position.x = velocity.x
+	blend_position.y = velocity.y
 	# Sends parameter data to the animation tree
-	animation_tree.set("parameters/Move/blend_position", blend_position)
+	animation_tree.set("parameters/Move/blend_position", blend_position.normalized())
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
