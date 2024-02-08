@@ -8,10 +8,15 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var spell_active = get_parent().char_component.spell_active
+	var char = get_parent().char_component
+	var spell_active = char.spell_active
 	var state = get_parent().state_machine.current_state.name
 	if spell_active:
 		spell_active = "Spell Active, "
 	else:
-		spell_active = ""
+		if char.cooling_down:
+			spell_active = "CD " + str(int(char.timer.time_left)) + ", "
+
+		else:
+			spell_active = ""
 	text = spell_active + state

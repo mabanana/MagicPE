@@ -45,6 +45,6 @@ func _on_ball_entered(area):
 func depossess_ball(anim_name = null):
 	if ball:
 		ball.depossess()
-		if state_machine.current_state is PossessionState:
-			state_machine.current_state.on_depossession(anim_name)
+	if state_machine.current_state is PossessionState:
+		state_machine.current_state.on_depossession(anim_name)
 	ball = null

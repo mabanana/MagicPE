@@ -4,4 +4,11 @@
 
 [node name="TricksterComponent" type="Node"]
 script = ExtResource("1_f1pvb")
+cooldown = 10
 duration = 3
+
+[node name="Cooldown" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="Cooldown" to="." method="_on_timer_timeout"]
