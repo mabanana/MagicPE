@@ -44,14 +44,13 @@ func _ready():
 func _physics_process(delta):
 	x_direction = Input.get_axis("ui_left", "ui_right")
 	y_direction = Input.get_axis("ui_up", "ui_down")
-	
-	if not x_direction and not y_direction:
-		velocity.y = move_toward(velocity.x, 0, move_speed)
-		velocity.x = move_toward(velocity.x, 0, move_speed)
-	else:
+	if state_machine.is_can_move() and (x_direction or y_direction):
 		velocity.x = x_direction
 		velocity.y = y_direction
 		velocity = velocity.normalized() * move_speed
+	else:
+		velocity.y = move_toward(velocity.x, 0, move_speed)
+		velocity.x = move_toward(velocity.x, 0, move_speed)
 	#print("PlayerEntity: Velocity(x,y):", velocity.x, velocity.y)
 	#print("PlayerEntity: GlobalPosition(x,y):", global_position.x, global_position.y)
 	#print("PlayerEntity: InputDirection: x",x_direction, ", y", y_direction)
