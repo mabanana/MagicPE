@@ -17,4 +17,3 @@ func on_depossession(anim_name = null):
 
 func _on_soccer_component_depossessed(anim_name):
 	on_depossession(anim_name)
-

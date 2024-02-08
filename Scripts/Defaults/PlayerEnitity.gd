@@ -40,6 +40,8 @@ func _ready():
 		elif child is CharacterComponent:
 			char_component = child
 	game_component.state_machine = state_machine
+	state_machine.game_component = game_component
+	state_machine.char_component = char_component
 
 func _physics_process(delta):
 	x_direction = Input.get_axis("ui_left", "ui_right")
@@ -87,12 +89,12 @@ func _input(event):
 	
 	elif event.is_action_pressed("main_interact"):
 		print("PlayerEntity: Main Interact pressed")
+		state_machine.current_state.main_interact()
 		if state_machine.is_can_cast():
-			if char_component.spell_active:
-				char_component.spell_active = false
-				char_component.possession_spell()
-			game_component.main_interact(state_machine.current_state)
+			char_component.main_interact(state_machine.current_state)
+	
 	elif event.is_action_pressed("secondary_interact"):
 		print("PlayerEntity: Secondary Interact pressed")
-		char_component.spell_active = not char_component.spell_active
+		if state_machine.is_can_cast():
+			char_component.secondary_interact(state_machine.current_state)
 	state_machine.state_machine_input(event)

@@ -5,8 +5,8 @@ var spell_active: bool = false
 @export var cooldown: int
 @export var duration: int
 
-func sec_interaction(state_name):
-	pass
+func secondary_interact(state):
+	spell_active = not spell_active
 
-func activate_spell():
+func main_interact(state):
 	pass
