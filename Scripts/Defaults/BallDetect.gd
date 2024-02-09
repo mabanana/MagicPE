@@ -1,8 +1,10 @@
 extends Area2D
 class_name BallDetect
+@export var duration: float = 0.1
+
 
 func _ready():
-	pass
+	$Timer.start(duration)
 
 func _process(delta):
 	pass

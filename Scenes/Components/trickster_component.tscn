@@ -1,14 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://dy8wxelhw7hmu"]
+[gd_scene load_steps=3 format=3 uid="uid://dy8wxelhw7hmu"]
 
 [ext_resource type="Script" path="res://Scripts/Character/TricksterComponent.gd" id="1_f1pvb"]
+[ext_resource type="PackedScene" uid="uid://bprg7u0bltltx" path="res://Scenes/Entities/FakeBall.tscn" id="2_1wqtc"]
 
-[node name="TricksterComponent" type="Node"]
+[node name="TricksterComponent" type="Node2D"]
 script = ExtResource("1_f1pvb")
-cooldown = 10
+fake_ball_scene = ExtResource("2_1wqtc")
+cooldown = 1
 duration = 3
 
 [node name="Cooldown" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
+
+[node name="FakeBalls" type="Node" parent="."]
 
 [connection signal="timeout" from="Cooldown" to="." method="_on_timer_timeout"]

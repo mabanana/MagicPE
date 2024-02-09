@@ -39,11 +39,8 @@ shape = SubResource("RectangleShape2D_dh0tf")
 scale = Vector2(0.2, 0.182)
 texture = ExtResource("2_6ly2v")
 
-[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state", "character", "animation_tree")]
+[node name="CharacterStateMachine" type="Node" parent="."]
 script = ExtResource("3_6mjdp")
-current_state = NodePath("Idle")
-character = NodePath("..")
-animation_tree = NodePath("../AnimationTree")
 
 [node name="Idle" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("4_aggig")
@@ -67,8 +64,8 @@ script = ExtResource("6_rkxgd")
 [node name="SoccerComponent" type="Node2D" parent="GameComponent"]
 script = ExtResource("7_bsa8r")
 
-[node name="CharacterComponent" type="Node" parent="."]
+[node name="CharacterComponent" type="Node2D" parent="."]
 script = ExtResource("8_3y8qq")
 
-[node name="TricksterComponent" type="Node" parent="CharacterComponent"]
+[node name="TricksterComponent" type="Node2D" parent="CharacterComponent"]
 script = ExtResource("9_rbghm")

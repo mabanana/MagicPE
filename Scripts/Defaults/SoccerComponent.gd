@@ -5,9 +5,10 @@ const offset = 25
 @export var ball_marker = Marker2D
 @export var kick_spin: int = 500
 @export var kick_speed: int = 70
+@export var ball_detect: PackedScene
 var state_machine: CharacterStateMachine
 var ball: RigidBody2D = null
-var ball_detect = preload("res://Scenes/Instances/ball_detect.tscn")
+
 
 
 func main_interact(state):

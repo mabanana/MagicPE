@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name CharacterComponent
 
 var cooling_down: bool = false
