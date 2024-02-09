@@ -1,15 +1,88 @@
-[gd_scene load_steps=5 format=3 uid="uid://dt51w17dqwmnj"]
+[gd_scene load_steps=7 format=3 uid="uid://dt51w17dqwmnj"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/TestGameInstance.gd" id="1_1rq7v"]
-[ext_resource type="PackedScene" uid="uid://ib4xlod7bufl" path="res://Scenes/GameScenes/Test1.tscn" id="2_676c6"]
-[ext_resource type="Resource" uid="uid://bcw6qgywnh5sj" path="res://Resources/Soccer.tres" id="2_n4gt1"]
-[ext_resource type="Resource" uid="uid://bddl1wxkt3kxm" path="res://Resources/BackpackMan.tres" id="3_1vkc7"]
+[ext_resource type="Script" path="res://Scenes/Main.gd" id="1_smpd1"]
+[ext_resource type="Script" path="res://Scripts/Defaults/GameManager.gd" id="2_jkftq"]
+[ext_resource type="PackedScene" uid="uid://dgokfj5jrgdx" path="res://Scenes/Instances/GameInstance.tscn" id="3_petj2"]
+[ext_resource type="PackedScene" uid="uid://2qjwalx2xb6f" path="res://Scenes/Instances/character_select_scene.tscn" id="3_yuvu1"]
+[ext_resource type="Texture2D" uid="uid://dj33aulbuedfk" path="res://Assets/UI/GradientTexture.tres" id="4_im08t"]
+[ext_resource type="Script" path="res://Scenes/Menus/MainMenu.gd" id="5_f1ivd"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("game_manager")]
+process_mode = 3
+script = ExtResource("1_smpd1")
+game_manager = NodePath("GameManager")
 
-[node name="GameInstance" type="Node" parent="."]
-script = ExtResource("1_1rq7v")
-game_mode = ExtResource("2_n4gt1")
-character = ExtResource("3_1vkc7")
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("2_jkftq")
+game_instance_scene = ExtResource("3_petj2")
+character_select_scene = ExtResource("3_yuvu1")
 
-[node name="Test1" parent="GameInstance" instance=ExtResource("2_676c6")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_im08t")
+script = ExtResource("5_f1ivd")
+
+[node name="PanelContainer" type="Control" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Panel/PanelContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -76.5
+offset_right = 150.0
+offset_bottom = 76.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel/PanelContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Magic Highschool PE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel/PanelContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(300, 170)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 30
+
+[node name="Start" type="Button" parent="CanvasLayer/Panel/PanelContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Start Game
+"
+
+[node name="Controls" type="Button" parent="CanvasLayer/Panel/PanelContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Controls"
+
+[node name="Quit" type="Button" parent="CanvasLayer/Panel/PanelContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit Game
+"
+
+[connection signal="pressed" from="CanvasLayer/Panel/PanelContainer/VBoxContainer2/VBoxContainer/Start" to="GameManager" method="_on_start_pressed"]

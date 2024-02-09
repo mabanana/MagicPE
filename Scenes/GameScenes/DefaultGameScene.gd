@@ -8,7 +8,7 @@ var character: CharacterResource
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	game_mode = get_parent().game_mode
-	character = get_parent().character
+	character = get_parent().characters[0]
 	
 	var player = backpackman.instantiate()
 	player.game_component_scene = game_mode.game_component

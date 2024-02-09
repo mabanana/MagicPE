@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://2qjwalx2xb6f"]
+
+[ext_resource type="Script" path="res://Scripts/Defaults/CharacterSelectScene.gd" id="1_7k6io"]
+[ext_resource type="Resource" uid="uid://b8n2fxty2jrs4" path="res://Resources/AllCharAndModes.tres" id="2_yjtyu"]
+[ext_resource type="Texture2D" uid="uid://dj33aulbuedfk" path="res://Assets/UI/GradientTexture.tres" id="3_bglu2"]
+[ext_resource type="PackedScene" uid="uid://bf6jdkwvgdf5b" path="res://Scenes/UI/SelectionGridButton.tscn" id="4_j4fjp"]
+
+[node name="CharacterSelectScene" type="Node2D" node_paths=PackedStringArray("characters_grid", "game_modes_grid", "continue_button")]
+script = ExtResource("1_7k6io")
+char_mode_resource = ExtResource("2_yjtyu")
+grid_item_scene = ExtResource("4_j4fjp")
+characters_grid = NodePath("CanvasLayer/TextureRect/HBoxContainer/CharactersGrid")
+game_modes_grid = NodePath("CanvasLayer/TextureRect/HBoxContainer/GameModesGrid")
+continue_button = NodePath("CanvasLayer/TextureRect/HBoxContainer/ContinueButton")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bglu2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TextureRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CharactersGrid" type="GridContainer" parent="CanvasLayer/TextureRect/HBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="GameModesGrid" type="GridContainer" parent="CanvasLayer/TextureRect/HBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="ContinueButton" type="Button" parent="CanvasLayer/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[connection signal="pressed" from="CanvasLayer/TextureRect/HBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]

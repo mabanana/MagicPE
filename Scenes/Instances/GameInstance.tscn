@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgokfj5jrgdx"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/TestGameInstance.gd" id="1_jlq0v"]
+[ext_resource type="PackedScene" uid="uid://ib4xlod7bufl" path="res://Scenes/GameScenes/Test1.tscn" id="2_jlmy3"]
+
+[node name="GameInstance" type="Node"]
+process_mode = 1
+script = ExtResource("1_jlq0v")
+game_scene = ExtResource("2_jlmy3")
+
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

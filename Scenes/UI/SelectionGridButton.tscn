@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf6jdkwvgdf5b"]
+
+[ext_resource type="Script" path="res://Scripts/UI/SelectionGridItem.gd" id="1_kla0n"]
+[ext_resource type="Resource" uid="uid://bddl1wxkt3kxm" path="res://Resources/BackpackMan.tres" id="2_t8q3c"]
+
+[node name="TextureButton" type="TextureButton"]
+script = ExtResource("1_kla0n")
+resource = ExtResource("2_t8q3c")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

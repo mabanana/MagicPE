@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="CharacterResource" load_steps=4 format=3 uid="uid://bddl1wxkt3kxm"]
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=5 format=3 uid="uid://bddl1wxkt3kxm"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/CharacterResource.gd" id="1_w5b5d"]
 [ext_resource type="PackedScene" uid="uid://cu1i4mg6turmk" path="res://Scenes/Components/backpack_man_animation_tree.tscn" id="1_wnqxm"]
 [ext_resource type="PackedScene" uid="uid://dy8wxelhw7hmu" path="res://Scenes/Components/trickster_component.tscn" id="2_j0s5l"]
+[ext_resource type="Texture2D" uid="uid://vcyuic2sqqw0" path="res://Assets/Sprites/reaper_icon.png" id="3_anfv2"]
 
 [resource]
 script = ExtResource("1_w5b5d")
 name = "Backpack Man"
 character_component = ExtResource("2_j0s5l")
 animation_tree = ExtResource("1_wnqxm")
+icon = ExtResource("3_anfv2")

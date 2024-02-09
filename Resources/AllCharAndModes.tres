@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ResourceDict" load_steps=4 format=3 uid="uid://b8n2fxty2jrs4"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/ResourceDict.gd" id="1_2gt2d"]
+[ext_resource type="Resource" uid="uid://bddl1wxkt3kxm" path="res://Resources/BackpackMan.tres" id="1_o8wot"]
+[ext_resource type="Resource" uid="uid://bcw6qgywnh5sj" path="res://Resources/Soccer.tres" id="2_hgc64"]
+
+[resource]
+script = ExtResource("1_2gt2d")
+characters = Array[Resource("res://Scripts/Resources/CharacterResource.gd")]([ExtResource("1_o8wot")])
+game_modes = Array[Resource("res://Scripts/Resources/GameMode.gd")]([ExtResource("2_hgc64")])

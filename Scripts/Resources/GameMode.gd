@@ -7,3 +7,4 @@ class_name GameMode
 @export var state_machine: PackedScene
 
 @export var game_entities: Array[GameEntity]
+@export var icon: Texture

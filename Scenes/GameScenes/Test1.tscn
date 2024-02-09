@@ -52,6 +52,7 @@ polygon = PackedVector2Array(23, -48, 23, 45, 35, 45, 35, -48)
 position = Vector2(-216, -27)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
