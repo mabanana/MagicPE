@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GameEntity" load_steps=4 format=3 uid="uid://bfue0xcxcv33k"]
+
+[ext_resource type="PackedScene" uid="uid://bprg7u0bltltx" path="res://Scenes/Entities/FakeBall.tscn" id="1_7v77i"]
+[ext_resource type="Script" path="res://Scripts/Resources/GameEntity.gd" id="1_l4b7r"]
+[ext_resource type="Texture2D" uid="uid://bftht6sy1lt3s" path="res://Assets/Sprites/SoccerBall.png" id="3_4vqv4"]
+
+[resource]
+script = ExtResource("1_l4b7r")
+name = "Fake Ball"
+scene = ExtResource("1_7v77i")
+sprite = ExtResource("3_4vqv4")

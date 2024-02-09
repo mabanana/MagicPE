@@ -20,6 +20,7 @@ game_instance_scene = ExtResource("3_petj2")
 character_select_scene = ExtResource("3_yuvu1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="Panel" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 15

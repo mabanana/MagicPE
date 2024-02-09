@@ -7,10 +7,14 @@ const spin_multiplier: int = 150
 var texture
 @export var sprite: Sprite2D
 
+func on_ready():
+	pass
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	possessed = false
 	sprite.texture = texture
+	on_ready()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

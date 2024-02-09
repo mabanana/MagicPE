@@ -26,7 +26,6 @@ func _ready():
 	menu_label.text = "Magic Highschool P.E."
 
 func _unhandled_key_input(event):
-	print("Main: unhandled input detected, tree paused is ", is_paused)
 	if event.is_action_released("ui_cancel") and game_started:
 		toggle_pause()
 

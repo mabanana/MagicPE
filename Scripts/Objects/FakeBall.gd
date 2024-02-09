@@ -1,12 +1,11 @@
 extends Ball
 class_name FakeBall
-var kick_speed: int = 400
+var kick_speed: int = 600
 @export var timer: Timer
 var duration: int = 3
 
-func _ready():
+func on_ready():
 	print("FakeBall: ready")
-	possessed = false
 	timer.start(duration)
 	random_kick()
 

@@ -1,7 +1,7 @@
 extends CharacterComponent
 class_name TricksterComponent
 @onready var timer = %Cooldown
-@export var fake_ball_scene: PackedScene
+@export var fake_ball_resource: GameEntity
 const instance_offset = Vector2(15,15)
 
 func main_interact(state):
@@ -13,9 +13,10 @@ func main_interact(state):
 
 func possession_spell():
 	print("TricksterComponent: Activate possession spell effect")
-	var fake_ball = fake_ball_scene.instantiate()
+	var fake_ball = fake_ball_resource.scene.instantiate()
 	fake_ball.global_position = get_parent().global_position+(instance_offset*get_parent().facing)
 	fake_ball.duration = duration
+	fake_ball.texture = fake_ball_resource.sprite
 	$FakeBalls.add_child(fake_ball)
 	spell_active = false
 
