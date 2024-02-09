@@ -12,5 +12,5 @@ func _ready():
 
 
 func _on_child_exiting_tree(node):
-	if get_child_count() == 0:
+	if node is GameScene:
 		queue_free()

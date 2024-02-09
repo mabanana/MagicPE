@@ -10,6 +10,11 @@ func _ready():
 	game_mode = get_parent().game_mode
 	character = get_parent().characters[0]
 	
+	for entity in game_mode.game_entities:
+		var new_ent = entity.scene.instantiate()
+		new_ent.texture = entity.sprite
+		add_child(new_ent)
+	
 	var player = backpackman.instantiate()
 	player.game_component_scene = game_mode.game_component
 	player.state_machine_scene = game_mode.state_machine
@@ -22,7 +27,12 @@ func _ready():
 	player.global_position = get_node("PlayerSpawn").global_position
 	add_child(player)
 	
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func _on_quit_pressed():
+	queue_free()

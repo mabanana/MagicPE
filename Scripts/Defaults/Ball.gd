@@ -4,11 +4,13 @@ var possessed: bool
 var possesser: Marker2D
 const turn_speed: int = 350
 const spin_multiplier: int = 150
+var texture
+@export var sprite: Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	possessed = false
-	
+	sprite.texture = texture
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

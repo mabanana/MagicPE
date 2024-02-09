@@ -16,12 +16,19 @@ func _process(delta):
 func _on_pressed():
 	print("SelectionGridItem: button pressed, this button is for ", resource.name)
 	get_scene().select(resource)
-	
-	
+
+
 func get_scene(node = self, scene_type = "CharacterSelectScene"):
 	var parent = node.get_parent()
-	print(parent.name)
 	if parent.name == scene_type:
 		return parent
 	else:
 		return get_scene(parent, scene_type)
+
+
+func _on_mouse_entered():
+	self_modulate = Color(1,1,0.8,0.7)
+
+
+func _on_mouse_exited():
+	self_modulate = Color(1,1,1,1)

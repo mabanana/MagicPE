@@ -4,7 +4,19 @@
 [ext_resource type="Resource" uid="uid://bddl1wxkt3kxm" path="res://Resources/BackpackMan.tres" id="2_t8q3c"]
 
 [node name="TextureButton" type="TextureButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch_mode = 0
 script = ExtResource("1_kla0n")
 resource = ExtResource("2_t8q3c")
 
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="." to="." method="_on_pressed"]

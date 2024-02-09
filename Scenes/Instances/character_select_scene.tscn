@@ -9,9 +9,9 @@
 script = ExtResource("1_7k6io")
 char_mode_resource = ExtResource("2_yjtyu")
 grid_item_scene = ExtResource("4_j4fjp")
-characters_grid = NodePath("CanvasLayer/TextureRect/HBoxContainer/CharactersGrid")
-game_modes_grid = NodePath("CanvasLayer/TextureRect/HBoxContainer/GameModesGrid")
-continue_button = NodePath("CanvasLayer/TextureRect/HBoxContainer/ContinueButton")
+characters_grid = NodePath("CanvasLayer/TextureRect/VBoxContainer/HBoxContainer/CharactersGrid")
+game_modes_grid = NodePath("CanvasLayer/TextureRect/VBoxContainer/HBoxContainer/GameModesGrid")
+continue_button = NodePath("CanvasLayer/TextureRect/VBoxContainer/HBoxContainer/ContinueButton")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -23,21 +23,36 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_bglu2")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TextureRect"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="CharactersGrid" type="GridContainer" parent="CanvasLayer/TextureRect/HBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/TextureRect/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TextureRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CharactersGrid" type="GridContainer" parent="CanvasLayer/TextureRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 columns = 2
 
-[node name="GameModesGrid" type="GridContainer" parent="CanvasLayer/TextureRect/HBoxContainer"]
+[node name="GameModesGrid" type="GridContainer" parent="CanvasLayer/TextureRect/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 columns = 2
 
-[node name="ContinueButton" type="Button" parent="CanvasLayer/TextureRect/HBoxContainer"]
+[node name="ContinueButton" type="Button" parent="CanvasLayer/TextureRect/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_vertical = 8
 text = "Continue"
 
-[connection signal="pressed" from="CanvasLayer/TextureRect/HBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TextureRect/VBoxContainer/HBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]

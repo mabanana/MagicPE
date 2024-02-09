@@ -11,4 +11,3 @@ func _process(delta):
 	else:
 		hide()
 
-		

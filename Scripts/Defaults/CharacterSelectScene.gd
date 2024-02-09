@@ -35,6 +35,7 @@ func select(resource: Resource):
 			print("CharacterSelect: ", resource.name, " added to character selection")
 	print("CharacterSelect: selected mode,chars = ", selected_mode, selected_chars)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta):
 	if selected_mode and len(selected_chars) > 0:
 		continue_button.show()

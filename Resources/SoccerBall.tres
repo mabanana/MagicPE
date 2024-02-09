@@ -8,4 +8,4 @@
 script = ExtResource("1_ld2uv")
 name = "Soccer Ball"
 scene = ExtResource("1_y3d2s")
-Sprite = ExtResource("1_3klmp")
+sprite = ExtResource("1_3klmp")

@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://ib4xlod7bufl"]
+[gd_scene load_steps=6 format=3 uid="uid://ib4xlod7bufl"]
 
 [ext_resource type="Script" path="res://Scenes/GameScenes/DefaultGameScene.gd" id="1_ktq6v"]
-[ext_resource type="PackedScene" uid="uid://lnfoibag74he" path="res://Scenes/Entities/Ball.tscn" id="2_5xotj"]
 [ext_resource type="Script" path="res://Scripts/Objects/TestGoal.gd" id="3_kci6y"]
 [ext_resource type="Theme" uid="uid://eqmbgyl3xufq" path="res://Assets/UI/kenneyUI-yellow.tres" id="8_3ck8v"]
 
@@ -31,9 +30,6 @@ polygon = PackedVector2Array(-288, -154, 287, -155, 288, 162, -290, 162, -289, -
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.8, 1.8)
 
-[node name="Ball" parent="." instance=ExtResource("2_5xotj")]
-position = Vector2(0, 1)
-
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 2
@@ -52,7 +48,6 @@ polygon = PackedVector2Array(23, -48, 23, 45, 35, 45, 35, -48)
 position = Vector2(-216, -27)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -63,6 +58,7 @@ grow_horizontal = 0
 theme = ExtResource("8_3ck8v")
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control"]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -71,21 +67,26 @@ offset_left = -441.0
 offset_bottom = 18.0
 grow_horizontal = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/PanelContainer"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control/PanelContainer"]
+layout_mode = 2
+color = Color(1, 0.780392, 0.309804, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/PanelContainer/ColorRect"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
+offset_right = 441.0
+offset_bottom = 25.0
 alignment = 1
 
-[node name="Exit Game" type="Button" parent="CanvasLayer/Control/PanelContainer/HBoxContainer"]
+[node name="CharInfo" type="Button" parent="CanvasLayer/Control/PanelContainer/ColorRect/HBoxContainer"]
 layout_mode = 2
-text = "Exit Game"
-
-[node name="Pause" type="Button" parent="CanvasLayer/Control/PanelContainer/HBoxContainer"]
-layout_mode = 2
-text = "Pause"
-
-[node name="Button3" type="Button" parent="CanvasLayer/Control/PanelContainer/HBoxContainer"]
-layout_mode = 2
+size_flags_horizontal = 3
 text = "Character Information"
 
+[node name="Quit" type="Button" parent="CanvasLayer/Control/PanelContainer/ColorRect/HBoxContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 1.45
+text = "Quit"
+
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="pressed" from="CanvasLayer/Control/PanelContainer/ColorRect/HBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://cu1i4mg6turmk"]
 
-[ext_resource type="AnimationLibrary" uid="uid://djswc3utmpsaa" path="res://Animations/BackpackMan.res" id="1_jrakp"]
+[ext_resource type="AnimationLibrary" uid="uid://djswc3utmpsaa" path="res://Animations/BackpackManAnimationLibrary.res" id="1_jrakp"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_82efg"]
 animation = &"Kick"
