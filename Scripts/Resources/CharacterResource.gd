@@ -2,8 +2,6 @@ extends Resource
 class_name CharacterResource
 
 @export var name: String
-@export var character_component: PackedScene
-@export var animation_tree: PackedScene
 @export var icon: Texture
 var resources_dir: String = "res://Resources/"
 #@export var skin

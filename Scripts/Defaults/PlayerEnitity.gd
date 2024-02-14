@@ -15,6 +15,7 @@ var char_component_scene: PackedScene
 var animation_tree_scene: PackedScene
 var state_machine_scene: PackedScene
 var game_component_scene: PackedScene
+var animation_player_scene: PackedScene
 
 var blend_position: Vector2
 var x_direction: int
@@ -35,6 +36,7 @@ func _ready():
 	for child in get_children():
 		if child is AnimationTree:
 			animation_tree = child
+			animation_tree.set_anim_player(animation_player_scene)
 		elif child is GameComponent:
 			game_component = child
 		elif child is CharacterStateMachine:

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://2v0u5v3qy4up"]
+
+[ext_resource type="AnimationLibrary" uid="uid://ckh8rlswardjn" path="res://Animations/BackpackManAnimationLibrary.res" id="1_i5evp"]
+
+[node name="backpack_man_animation_player" type="AnimationPlayer"]
+libraries = {
+"": ExtResource("1_i5evp")
+}

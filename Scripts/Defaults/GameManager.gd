@@ -5,7 +5,7 @@ class_name GameManager
 @export var character_select_scene: PackedScene
 
 
-func create_game_instance(characters:Array[CharacterResource], game_mode:GameMode):
+func create_game_instance(characters:Array[CharacterModeResource], game_mode:GameMode):
 	var game_instance = game_instance_scene.instantiate()
 	game_instance.game_mode = game_mode
 	game_instance.characters = characters

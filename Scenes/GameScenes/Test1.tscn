@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ib4xlod7bufl"]
 
-[ext_resource type="Script" path="res://Scenes/GameScenes/DefaultGameScene.gd" id="1_ktq6v"]
+[ext_resource type="Script" path="res://Scripts/Defaults/DefaultGameScene.gd" id="1_0g5iq"]
 [ext_resource type="Script" path="res://Scripts/Objects/TestGoal.gd" id="3_kci6y"]
 [ext_resource type="Theme" uid="uid://eqmbgyl3xufq" path="res://Assets/UI/kenneyUI-yellow.tres" id="8_3ck8v"]
 
@@ -10,7 +10,7 @@
 size = Vector2(12, 93)
 
 [node name="Test1" type="Node2D"]
-script = ExtResource("1_ktq6v")
+script = ExtResource("1_0g5iq")
 
 [node name="Court" type="RigidBody2D" parent="."]
 collision_layer = 4

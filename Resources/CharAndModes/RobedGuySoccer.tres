@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CharacterModeResource" load_steps=6 format=3 uid="uid://1f8swqa1yxmy"]
+
+[ext_resource type="PackedScene" uid="uid://c3fg8wcro1mc4" path="res://Scenes/Components/robed_guy_animation_player.tscn" id="1_adjp5"]
+[ext_resource type="Script" path="res://Scripts/Resources/CharacterModeResource.gd" id="1_jhhl0"]
+[ext_resource type="PackedScene" uid="uid://dy8wxelhw7hmu" path="res://Scenes/Components/trickster_component.tscn" id="2_bn4e3"]
+[ext_resource type="Resource" uid="uid://bifjvt0ll7kqu" path="res://Resources/CharAndModes/RobedGuy.tres" id="3_8qjec"]
+[ext_resource type="Texture2D" uid="uid://clegrc7a3ehuq" path="res://Assets/Sprites/RobedGuy Icon.png" id="4_7jvnj"]
+
+[resource]
+script = ExtResource("1_jhhl0")
+animation_player = ExtResource("1_adjp5")
+character_component = ExtResource("2_bn4e3")
+character_resource = ExtResource("3_8qjec")
+icon = ExtResource("4_7jvnj")
+name = "Robed Guy"

@@ -1,6 +1,4 @@
 extends Resource
-class_name ResourceDict
+class_name GameModesList
 
-@export var characters: Array[CharacterResource]
 @export var game_modes: Array[GameMode]
-

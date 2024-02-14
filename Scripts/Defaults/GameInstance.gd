@@ -3,7 +3,7 @@ class_name GameInstance
 
 @export var game_scene: PackedScene
 var game_mode: GameMode
-var characters: Array[CharacterResource]
+var characters: Array[CharacterModeResource]
 var game_map
 
 func _ready():

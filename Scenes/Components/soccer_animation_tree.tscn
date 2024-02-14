@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://cu1i4mg6turmk"]
 
-[ext_resource type="AnimationLibrary" uid="uid://djswc3utmpsaa" path="res://Animations/BackpackManAnimationLibrary.res" id="1_jrakp"]
+[ext_resource type="Script" path="res://Scripts/Defaults/game_animation_tree.gd" id="1_lbup2"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_82efg"]
 animation = &"Kick"
@@ -62,11 +62,5 @@ transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition
 
 [node name="BackpackManAnimationTree" type="AnimationTree"]
 tree_root = SubResource("AnimationNodeStateMachine_g5s75")
-anim_player = NodePath("AnimationPlayer")
-active = true
 parameters/Move/blend_position = Vector2(0, 0)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": ExtResource("1_jrakp")
-}
+script = ExtResource("1_lbup2")

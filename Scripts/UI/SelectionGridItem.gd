@@ -14,7 +14,7 @@ func _process(delta):
 
 
 func _on_pressed():
-	print("SelectionGridItem: button pressed, this button is for ", resource.name)
+	print("SelectionGridItem: button pressed, this button is for ")
 	get_scene().select(resource)
 
 

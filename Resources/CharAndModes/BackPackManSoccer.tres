@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CharacterModeResource" load_steps=6 format=3 uid="uid://c1ba7yc4b7une"]
+
+[ext_resource type="PackedScene" uid="uid://2v0u5v3qy4up" path="res://Scenes/Components/backpack_man_animation_player.tscn" id="1_hbn2w"]
+[ext_resource type="Script" path="res://Scripts/Resources/CharacterModeResource.gd" id="1_sbmxh"]
+[ext_resource type="PackedScene" uid="uid://dy8wxelhw7hmu" path="res://Scenes/Components/trickster_component.tscn" id="2_y6skj"]
+[ext_resource type="Resource" uid="uid://bddl1wxkt3kxm" path="res://Resources/CharAndModes/BackpackMan.tres" id="3_vde1p"]
+[ext_resource type="Texture2D" uid="uid://vcyuic2sqqw0" path="res://Assets/Sprites/reaper_icon.png" id="4_gmxdk"]
+
+[resource]
+script = ExtResource("1_sbmxh")
+animation_player = ExtResource("1_hbn2w")
+character_component = ExtResource("2_y6skj")
+character_resource = ExtResource("3_vde1p")
+icon = ExtResource("4_gmxdk")
+name = "Backpack Man"

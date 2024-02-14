@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=3 format=3 uid="uid://bifjvt0ll7kqu"]
+
+[ext_resource type="Texture2D" uid="uid://clegrc7a3ehuq" path="res://Assets/Sprites/RobedGuy Icon.png" id="1_3as6l"]
+[ext_resource type="Script" path="res://Scripts/Resources/CharacterResource.gd" id="1_p47w7"]
+
+[resource]
+script = ExtResource("1_p47w7")
+name = "Robed Guy"
+icon = ExtResource("1_3as6l")

@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://dy8wxelhw7hmu"]
 
 [ext_resource type="Script" path="res://Scripts/Character/TricksterComponent.gd" id="1_f1pvb"]
-[ext_resource type="Resource" uid="uid://bfue0xcxcv33k" path="res://Resources/FakeBall.tres" id="2_flsoh"]
+[ext_resource type="Resource" uid="uid://bfue0xcxcv33k" path="res://Resources/OtherEntities/FakeBall.tres" id="2_lu35k"]
 
 [node name="TricksterComponent" type="Node2D"]
 script = ExtResource("1_f1pvb")
-fake_ball_resource = ExtResource("2_flsoh")
+fake_ball_resource = ExtResource("2_lu35k")
 cooldown = 1
 duration = 3
 
