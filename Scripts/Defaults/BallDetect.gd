@@ -4,8 +4,7 @@ class_name BallDetect
 
 
 func _ready():
-	if duration > 0:
-		start_timer(duration)
+	start_timer(duration)
 
 func _process(delta):
 	pass

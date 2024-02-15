@@ -51,11 +51,16 @@ func depossess_ball(anim_name = null):
 		state_machine.current_state.on_depossession(anim_name)
 	ball = null
 
+func on_possess_ball():
+	on_player_control()
+
 func on_player_control_lost():
-	var inst = ball_detect.instantiate()
-	inst.duration = -1
-	add_child(inst)
+	pass
 	
 func on_player_control():
-	if has_node("BallDetect"):
-		get_node("BallDetect").queue_free()
+	pass
+
+
+func _on_area_2d_area_entered(area):
+	if area.get_parent() is Ball and not get_parent().is_current_player:
+		state_machine.current_state.main_interact()

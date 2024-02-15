@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/Menus/Main.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Scene="*res://Scripts/Autoload/SceneAutoload.gd"
+
 [input]
 
 ui_select={

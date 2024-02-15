@@ -51,6 +51,8 @@ func _ready():
 	
 	if game_component.has_method("on_player_control_lost") and not is_current_player:
 		game_component.on_player_control_lost()
+	if game_component.has_method("on_player_control") and is_current_player:
+		game_component.on_player_control()	
 	
 func _physics_process(delta):
 	if x_direction or y_direction:
@@ -67,10 +69,14 @@ func _physics_process(delta):
 	check_facing()
 	pass_blend_position()
 	state_machine.state_machine_process(delta)
-
-
 	move_and_slide()
-	
+
+func toggle_player_control(toggle_to = false):
+	is_current_player = toggle_to
+	if not is_current_player:
+		game_component.on_player_control_lost()
+		x_direction = 0
+		y_direction = 0
 
 func check_facing():
 	var dir: int

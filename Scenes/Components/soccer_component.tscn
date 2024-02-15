@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dywh1r04mpf0h"]
+[gd_scene load_steps=4 format=3 uid="uid://dywh1r04mpf0h"]
 
 [ext_resource type="Script" path="res://Scripts/Defaults/SoccerComponent.gd" id="1_asgjt"]
 [ext_resource type="PackedScene" uid="uid://ctl07hyhm8duk" path="res://Scenes/Entities/ball_detect.tscn" id="2_8dpjm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3r8go"]
+radius = 25.0
 
 [node name="SoccerComponent" type="Node2D" node_paths=PackedStringArray("ball_marker")]
 script = ExtResource("1_asgjt")
@@ -10,3 +13,12 @@ ball_detect = ExtResource("2_8dpjm")
 
 [node name="BallMarker" type="Marker2D" parent="."]
 position = Vector2(0, 10)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2, 0)
+shape = SubResource("CircleShape2D_3r8go")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

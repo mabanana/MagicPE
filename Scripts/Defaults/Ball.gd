@@ -49,4 +49,5 @@ func depossess():
 	possesser = null
 
 func assign_possess(marker):
+	Scene.scene.change_player_control_to(marker.get_parent().get_parent())
 	possesser = marker
