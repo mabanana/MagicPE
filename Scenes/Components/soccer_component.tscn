@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_3r8go"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pceri"]
-radius = 100.0
+radius = 60.0
 
 [node name="SoccerComponent" type="Node2D" node_paths=PackedStringArray("ball_marker")]
 script = ExtResource("1_asgjt")

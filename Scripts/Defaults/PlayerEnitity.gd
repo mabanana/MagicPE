@@ -75,8 +75,8 @@ func toggle_player_control(toggle_to = false):
 	is_current_player = toggle_to
 	if not is_current_player:
 		game_component.on_player_control_lost()
-		x_direction = 0
-		y_direction = 0
+	x_direction = 0
+	y_direction = 0
 
 func check_facing():
 	var dir: int

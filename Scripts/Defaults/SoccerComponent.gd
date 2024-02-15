@@ -82,7 +82,7 @@ func _on_chase_detect_area_exited(area):
 func chase():
 	if is_chase:
 		var direction = chase_target.global_position - global_position
-		if direction.length() < 20:
+		if direction.length() < 10:
 			direction = Vector2(0,0)
 		direction.normalized()
 		get_parent().x_direction = direction.x
