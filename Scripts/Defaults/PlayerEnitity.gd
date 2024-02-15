@@ -6,6 +6,8 @@ class_name PlayerEntity
 @export var decceleration: int = 20
 @export var sprite_2d: Sprite2D
 
+var is_current_player: bool = false
+
 var state_machine: CharacterStateMachine
 var animation_tree: AnimationTree
 var char_component: CharacterComponent
@@ -46,15 +48,11 @@ func _ready():
 	game_component.state_machine = state_machine
 	state_machine.game_component = game_component
 	state_machine.char_component = char_component
-
+	
+	if game_component.has_method("on_player_control_lost") and not is_current_player:
+		game_component.on_player_control_lost()
+	
 func _physics_process(delta):
-	if state_machine.is_can_move():
-		x_direction = Input.get_axis("ui_left", "ui_right")
-		y_direction = Input.get_axis("ui_up", "ui_down")
-	else:
-		x_direction = 0
-		y_direction = 0
-
 	if x_direction or y_direction:
 		var acc = (sqrt(0.5)*acceleration) if (x_direction and y_direction) else acceleration 
 		velocity.x = move_toward(velocity.x, x_direction * move_speed, acceleration)
@@ -94,17 +92,25 @@ func pass_blend_position():
 	animation_tree.set("parameters/Move/blend_position", blend_position.normalized())
 
 func _input(event):
-	if event.is_action_pressed("ui_accept"):
-		pass
-	
-	elif event.is_action_pressed("main_interact"):
-		print("PlayerEntity: Main Interact pressed")
-		state_machine.current_state.main_interact()
-		if state_machine.is_can_cast():
-			char_component.main_interact(state_machine.current_state)
-	
-	elif event.is_action_pressed("secondary_interact"):
-		print("PlayerEntity: Secondary Interact pressed")
-		if state_machine.is_can_cast():
-			char_component.secondary_interact(state_machine.current_state)
-	state_machine.state_machine_input(event)
+	if is_current_player:
+		if state_machine.is_can_move():
+			x_direction = Input.get_axis("ui_left", "ui_right")
+			y_direction = Input.get_axis("ui_up", "ui_down")
+		else:
+			x_direction = 0
+			y_direction = 0
+		
+		if event.is_action_pressed("ui_accept"):
+			pass
+		
+		elif event.is_action_pressed("main_interact"):
+			print("PlayerEntity: Main Interact pressed")
+			state_machine.current_state.main_interact()
+			if state_machine.is_can_cast():
+				char_component.main_interact(state_machine.current_state)
+		
+		elif event.is_action_pressed("secondary_interact"):
+			print("PlayerEntity: Secondary Interact pressed")
+			if state_machine.is_can_cast():
+				char_component.secondary_interact(state_machine.current_state)
+		state_machine.state_machine_input(event)

@@ -10,7 +10,6 @@ var state_machine: CharacterStateMachine
 var ball: RigidBody2D = null
 
 
-
 func main_interact(state):
 	if state is PossessionState:
 		kick_ball(ball)
@@ -22,7 +21,10 @@ func main_interact(state):
 
 func _process(delta):
 	ball_marker.position.x = get_parent().facing * offset
-	
+	if ball and ball.possesser != ball_marker:
+		if state_machine.current_state is PossessionState:
+			state_machine.current_state.on_depossession()
+		ball = null
 	
 func kick_ball(b: RigidBody2D, is_shoot: bool = true):
 	var dir = (get_global_mouse_position() - ball_marker.global_position).normalized()
@@ -36,7 +38,7 @@ func kick_ball(b: RigidBody2D, is_shoot: bool = true):
 
 func _on_ball_entered(area):
 	var body = area.get_parent()
-	if body is Ball :
+	if body is Ball:
 		print("SoccerComponent:", body.name, " has been possessed")
 		body.possess(ball_marker)
 		ball = body
@@ -48,3 +50,12 @@ func depossess_ball(anim_name = null):
 	if state_machine.current_state is PossessionState:
 		state_machine.current_state.on_depossession(anim_name)
 	ball = null
+
+func on_player_control_lost():
+	var inst = ball_detect.instantiate()
+	inst.duration = -1
+	add_child(inst)
+	
+func on_player_control():
+	if has_node("BallDetect"):
+		get_node("BallDetect").queue_free()

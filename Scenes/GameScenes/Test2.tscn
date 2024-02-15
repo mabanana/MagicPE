@@ -1,17 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://ib4xlod7bufl"]
+[gd_scene load_steps=6 format=3 uid="uid://bnd6e4dcm4rsw"]
 
-[ext_resource type="Script" path="res://Scripts/Defaults/DefaultGameScene.gd" id="1_0g5iq"]
-[ext_resource type="Script" path="res://Scripts/Objects/TestGoal.gd" id="3_kci6y"]
-[ext_resource type="Theme" uid="uid://eqmbgyl3xufq" path="res://Assets/UI/kenneyUI-yellow.tres" id="8_3ck8v"]
+[ext_resource type="Script" path="res://Scripts/Defaults/DefaultGameScene.gd" id="1_vatns"]
+[ext_resource type="Script" path="res://Scripts/Objects/TestGoal.gd" id="2_tkb3h"]
+[ext_resource type="Theme" uid="uid://eqmbgyl3xufq" path="res://Assets/UI/kenneyUI-yellow.tres" id="3_qkd1i"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_go6d0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_euq7t"]
 size = Vector2(12, 93)
 
-[node name="Test1" type="Node2D" node_paths=PackedStringArray("player_spawns")]
-script = ExtResource("1_0g5iq")
-player_spawns = NodePath("PlayerSpawnMarkers")
+[node name="Test1" type="Node2D"]
+script = ExtResource("1_vatns")
 
 [node name="Court" type="RigidBody2D" parent="."]
 collision_layer = 4
@@ -34,7 +33,7 @@ zoom = Vector2(1.8, 1.8)
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 2
-script = ExtResource("3_kci6y")
+script = ExtResource("2_tkb3h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(287, -0.5)
@@ -45,13 +44,8 @@ position = Vector2(258, 1)
 color = Color(1, 0.443137, 1, 1)
 polygon = PackedVector2Array(23, -48, 23, 45, 35, 45, 35, -48)
 
-[node name="PlayerSpawnMarkers" type="Node" parent="."]
-
-[node name="PlayerSpawn" type="Marker2D" parent="PlayerSpawnMarkers"]
+[node name="PlayerSpawn" type="Marker2D" parent="."]
 position = Vector2(-216, -27)
-
-[node name="PlayerSpawn2" type="Marker2D" parent="PlayerSpawnMarkers"]
-position = Vector2(-160, 55)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -61,7 +55,7 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 grow_horizontal = 0
-theme = ExtResource("8_3ck8v")
+theme = ExtResource("3_qkd1i")
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control"]
 custom_minimum_size = Vector2(500, 0)

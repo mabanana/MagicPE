@@ -16,5 +16,4 @@ script = ExtResource("3_scj4f")
 
 [node name="Busy" type="Node" parent="."]
 script = ExtResource("4_emps4")
-can_move = false
 can_cast = false

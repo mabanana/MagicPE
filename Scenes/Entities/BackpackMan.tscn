@@ -3,17 +3,16 @@
 [ext_resource type="Script" path="res://Scripts/Defaults/PlayerEnitity.gd" id="1_ua6g4"]
 [ext_resource type="Script" path="res://Scripts/UI/DebugLabel.gd" id="2_vkivc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dh0tf"]
-size = Vector2(22, 25)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_egllh"]
 
 [node name="BackPackMan" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d")]
-collision_mask = 5
+collision_mask = 4
 script = ExtResource("1_ua6g4")
 sprite_2d = NodePath("Sprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 3.5)
-shape = SubResource("RectangleShape2D_dh0tf")
+shape = SubResource("CapsuleShape2D_egllh")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 

@@ -28,7 +28,9 @@ func _process(delta):
 		rotation_degrees += direction * spin_multiplier * delta * speed
 		global_position.x = move_toward(global_position.x, possesser.global_position.x, turn_speed*delta)
 		global_position.y = move_toward(global_position.y, possesser.global_position.y, turn_speed*delta)
-
+	if not possesser:
+		possessed = false
+		
 func _on_area_2d_body_entered(body):
 	print("Ball: detected body entering: ",body.name)
 	if body.name == "Court" and possesser:
