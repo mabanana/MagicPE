@@ -8,7 +8,8 @@ const offset = 25
 @export var ball_detect: PackedScene
 var state_machine: CharacterStateMachine
 var ball: RigidBody2D = null
-
+var is_chase: bool = false
+var chase_target: RigidBody2D
 
 func main_interact(state):
 	if state is PossessionState:
@@ -25,6 +26,8 @@ func _process(delta):
 		if state_machine.current_state is PossessionState:
 			state_machine.current_state.on_depossession()
 		ball = null
+	if not get_parent().is_current_player:
+		chase()
 	
 func kick_ball(b: RigidBody2D, is_shoot: bool = true):
 	var dir = (get_global_mouse_position() - ball_marker.global_position).normalized()
@@ -64,3 +67,26 @@ func on_player_control():
 func _on_area_2d_area_entered(area):
 	if area.get_parent() is Ball and not get_parent().is_current_player:
 		state_machine.current_state.main_interact()
+
+
+func _on_chase_detect_area_entered(area):
+	if area.get_parent() is Ball:
+		is_chase = true
+		chase_target = area.get_parent()
+		
+func _on_chase_detect_area_exited(area):
+	if area.get_parent() is Ball:
+		is_chase = false
+		chase_target = null
+
+func chase():
+	if is_chase:
+		var direction = chase_target.global_position - global_position
+		if direction.length() < 20:
+			direction = Vector2(0,0)
+		direction.normalized()
+		get_parent().x_direction = direction.x
+		get_parent().y_direction = direction.y
+	else:
+		get_parent().x_direction = 0
+		get_parent().y_direction = 0
