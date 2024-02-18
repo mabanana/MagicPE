@@ -13,6 +13,9 @@ size = Vector2(12, 93)
 script = ExtResource("1_0g5iq")
 player_spawns = NodePath("PlayerSpawnMarkers")
 
+[node name="Characters" type="Node" parent="."]
+unique_name_in_owner = true
+
 [node name="Court" type="RigidBody2D" parent="."]
 collision_layer = 4
 collision_mask = 7

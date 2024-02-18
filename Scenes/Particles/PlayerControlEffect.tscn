@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgqog5j3dlh4"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/OTParticle.gd" id="1_7prmn"]
+
+[sub_resource type="Curve" id="Curve_5fkwa"]
+_data = [Vector2(0.00568181, 1), 0.0, -0.840449, 0, 1, Vector2(0.460227, 0.617978), -3.46068, -3.46068, 0, 0, Vector2(1, 0.0337079), -1.08244, 0.0, 1, 0]
+point_count = 3
+
+[node name="PlayerControlEffect" type="CPUParticles2D"]
+emitting = false
+amount = 7
+one_shot = true
+explosiveness = 0.95
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 100.0
+angular_velocity_max = 320.0
+scale_amount_min = 2.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_5fkwa")
+script = ExtResource("1_7prmn")

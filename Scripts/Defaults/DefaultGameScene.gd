@@ -5,6 +5,7 @@ var game_mode: GameMode
 var character: CharacterModeResource
 var characters = []
 var player_characters: Array[PlayerEntity]
+
 @export var player_spawns: Node
 @onready var backpackman = preload("res://Scenes/Entities/BackpackMan.tscn")
 
@@ -45,11 +46,12 @@ func _ready():
 	player_characters[0].is_current_player = true
 		
 func change_player_control_to(player_character:PlayerEntity):
-	for char in player_characters:
-		if char == player_character:
-			char.toggle_player_control(true)
-		else:
-			char.toggle_player_control(false)
+	if not player_character.is_current_player:
+		for char in player_characters:
+			if char == player_character:
+				char.toggle_player_control(true)
+			else:
+				char.toggle_player_control(false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -59,3 +61,16 @@ func _process(delta):
 func _on_quit_pressed():
 	queue_free()
 
+func change_control_to_mouse():
+	change_player_control_to(get_closest_to_mouse_pos(player_characters))
+
+func get_closest_to_mouse_pos(arr:Array):
+	var mouse_pos = get_global_mouse_position()
+	if not arr or not arr[0] is Node2D:
+		return null
+	var closest = [0, (mouse_pos - arr[0].global_position).length()]
+	for i in range(1, len(arr)):
+		var distance = (mouse_pos - arr[i].global_position).length()
+		if distance < closest[1]:
+			closest = [i, distance]
+	return arr[closest[0]]

@@ -6,6 +6,8 @@ class_name PlayerEntity
 @export var decceleration: int = 20
 @export var sprite_2d: Sprite2D
 
+@export var on_player_control_particle: ParticleResource
+
 var is_current_player: bool = false
 
 var state_machine: CharacterStateMachine
@@ -75,6 +77,9 @@ func toggle_player_control(toggle_to = false):
 	is_current_player = toggle_to
 	if not is_current_player:
 		game_component.on_player_control_lost()
+	else:
+		var particle = on_player_control_particle.scene.instantiate()
+		add_child(particle)
 	x_direction = 0
 	y_direction = 0
 

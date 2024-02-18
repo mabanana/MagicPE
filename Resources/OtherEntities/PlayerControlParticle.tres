@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ParticleResource" load_steps=3 format=3 uid="uid://ce2rjw07aq50o"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/ParticleResource.gd" id="1_hkg8h"]
+[ext_resource type="PackedScene" uid="uid://bgqog5j3dlh4" path="res://Scenes/Particles/PlayerControlEffect.tscn" id="1_o61as"]
+
+[resource]
+script = ExtResource("1_hkg8h")
+scene = ExtResource("1_o61as")
