@@ -1,10 +1,11 @@
 extends Node2D
 class_name GameScene
 
+const char_switch_radius: int = 40
+
 var game_mode: GameMode
 var characters: Array
 var player_characters: Array[PlayerEntity]
-var char_switch_radius: int = 40
 
 @export var player_spawns: Node
 @onready var backpackman = preload("res://Scenes/Entities/BackpackMan.tscn")
@@ -13,6 +14,8 @@ var char_switch_radius: int = 40
 func _ready():
 	game_mode = get_parent().game_mode
 	characters = get_parent().characters
+	var c = get_parent().characters[0][0]
+	characters = [[c,c],[c,c]]
 	
 	for entity in game_mode.game_entities:
 		var new_ent = entity.scene.instantiate()
@@ -36,10 +39,10 @@ func _ready():
 				player.is_current_player = true
 			add_child(player)
 
-		#TODO: Assign the team captains to each player's control
-		for child in get_children():
-			if child is PlayerEntity:
-				player_characters.append(child)
+	#TODO: Assign the team captains to each player's control
+	for child in get_children():
+		if child is PlayerEntity:
+			player_characters.append(child)
 
 
 func change_player_control_to(player_character:PlayerEntity):
@@ -55,8 +58,9 @@ func change_player_control_to(player_character:PlayerEntity):
 
 func _on_quit_pressed():
 	queue_free()
-	
+
 func _on_char_info_pressed():
+	#instantiate a char information window and pause game
 	pass # Replace with function body.
 
 func change_control_to_mouse():

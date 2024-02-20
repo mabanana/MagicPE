@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dywh1r04mpf0h"]
 
-[ext_resource type="Script" path="res://Scripts/Defaults/SoccerComponent.gd" id="1_asgjt"]
+[ext_resource type="Script" path="res://Scripts/Defaults/SoccerComponentNoAI.gd" id="1_h8rox"]
 [ext_resource type="PackedScene" uid="uid://ctl07hyhm8duk" path="res://Scenes/Entities/ball_detect.tscn" id="2_8dpjm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3r8go"]
@@ -9,7 +9,7 @@
 radius = 60.0
 
 [node name="SoccerComponent" type="Node2D" node_paths=PackedStringArray("ball_marker")]
-script = ExtResource("1_asgjt")
+script = ExtResource("1_h8rox")
 ball_marker = NodePath("BallMarker")
 ball_detect = ExtResource("2_8dpjm")
 
