@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://2qjwalx2xb6f"]
+[gd_scene load_steps=6 format=3 uid="uid://2qjwalx2xb6f"]
 
 [ext_resource type="Script" path="res://Scripts/Defaults/CharacterSelectScene.gd" id="1_7k6io"]
 [ext_resource type="Resource" uid="uid://b8n2fxty2jrs4" path="res://Resources/AllGameModes.tres" id="2_d1fq0"]
 [ext_resource type="Texture2D" uid="uid://dj33aulbuedfk" path="res://Assets/UI/GradientTexture.tres" id="3_bglu2"]
+[ext_resource type="PackedScene" uid="uid://dh0aq1dcytquo" path="res://Scenes/UI/InstanceTopMenu.tscn" id="4_2ypje"]
 [ext_resource type="PackedScene" uid="uid://bf6jdkwvgdf5b" path="res://Scenes/UI/SelectionGridButton.tscn" id="4_j4fjp"]
 
 [node name="CharacterSelectScene" type="Node2D" node_paths=PackedStringArray("characters_grid", "game_modes_grid", "continue_button")]
@@ -12,6 +13,8 @@ grid_item_scene = ExtResource("4_j4fjp")
 characters_grid = NodePath("CanvasLayer/TextureRect/VBoxContainer/HBoxContainer/CharactersGrid")
 game_modes_grid = NodePath("CanvasLayer/TextureRect/VBoxContainer/HBoxContainer/GameModesGrid")
 continue_button = NodePath("CanvasLayer/TextureRect/VBoxContainer/HBoxContainer/ContinueButton")
+
+[node name="InstanceTopMenu" parent="." instance=ExtResource("4_2ypje")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

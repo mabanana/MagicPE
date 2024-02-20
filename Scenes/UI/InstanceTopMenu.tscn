@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh0aq1dcytquo"]
+
+[ext_resource type="Theme" uid="uid://eqmbgyl3xufq" path="res://Assets/UI/kenneyUI-yellow.tres" id="1_7osfl"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+theme = ExtResource("1_7osfl")
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -441.0
+offset_bottom = 18.0
+grow_horizontal = 0
+
+[node name="ColorRect" type="ColorRect" parent="Control/PanelContainer"]
+layout_mode = 2
+color = Color(1, 0.780392, 0.309804, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/ColorRect"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+offset_right = 441.0
+offset_bottom = 25.0
+alignment = 1
+
+[node name="CharInfo" type="Button" parent="Control/PanelContainer/ColorRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Character Information"
+
+[node name="Quit" type="Button" parent="Control/PanelContainer/ColorRect/HBoxContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 1.45
+text = "Quit"
