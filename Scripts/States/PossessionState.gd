@@ -21,5 +21,3 @@ func _on_soccer_component_depossessed(anim_name):
 
 func on_main_interact():
 	Scene.scene.change_control_to_mouse()
-	#Scene function find closest ally
-	#Scene function swap control to that ally

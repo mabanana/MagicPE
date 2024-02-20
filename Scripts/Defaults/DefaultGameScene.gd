@@ -5,6 +5,7 @@ var game_mode: GameMode
 var character: CharacterModeResource
 var characters = []
 var player_characters: Array[PlayerEntity]
+var char_switch_radius: int = 40
 
 @export var player_spawns: Node
 @onready var backpackman = preload("res://Scenes/Entities/BackpackMan.tscn")
@@ -46,6 +47,8 @@ func _ready():
 	player_characters[0].is_current_player = true
 		
 func change_player_control_to(player_character:PlayerEntity):
+	if not player_character:
+		return
 	if not player_character.is_current_player:
 		for char in player_characters:
 			if char == player_character:
@@ -73,4 +76,4 @@ func get_closest_to_mouse_pos(arr:Array):
 		var distance = (mouse_pos - arr[i].global_position).length()
 		if distance < closest[1]:
 			closest = [i, distance]
-	return arr[closest[0]]
+	return arr[closest[0]] if closest[1] > char_switch_radius else null
