@@ -9,6 +9,7 @@ class_name PlayerEntity
 @export var on_player_control_particle: ParticleResource
 
 var is_current_player: bool = false
+var team_id: int = 0
 
 var state_machine: CharacterStateMachine
 var animation_tree: AnimationTree

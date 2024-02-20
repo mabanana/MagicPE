@@ -30,14 +30,15 @@ func _process(delta):
 		global_position.y = move_toward(global_position.y, possesser.global_position.y, turn_speed*delta)
 	if not possesser:
 		possessed = false
-		
+
+
 func _on_area_2d_body_entered(body):
 	print("Ball: detected body entering: ",body.name)
 	if body.name == "Court" and possesser:
 		apply_impulse(possesser.global_position - possesser.get_parent().global_position)
 		possesser.get_parent().depossess_ball()
-		
-		
+
+
 func possess(marker):
 	possessed = true
 	sleeping = true

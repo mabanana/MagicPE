@@ -2,8 +2,7 @@ extends Node2D
 class_name GameScene
 
 var game_mode: GameMode
-var character: CharacterModeResource
-var characters = []
+var characters: Array
 var player_characters: Array[PlayerEntity]
 var char_switch_radius: int = 40
 
@@ -13,38 +12,35 @@ var char_switch_radius: int = 40
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	game_mode = get_parent().game_mode
-	character = get_parent().characters[0]
-	characters = [character, character]
-	
+	characters = get_parent().characters
 	
 	for entity in game_mode.game_entities:
 		var new_ent = entity.scene.instantiate()
 		new_ent.texture = entity.sprite
 		add_child(new_ent)
 	
-#	var player = backpackman.instantiate()
-#	player.game_component_scene = game_mode.game_component
-#	player.state_machine_scene = game_mode.state_machine
-#	player.animation_tree_scene = game_mode.animation_tree
-#	player.char_component_scene = character.character_component
-#	player.animation_player_scene = character.animation_player
-#	player.global_position = get_node("PlayerSpawn").global_position
-#	add_child(player)
-	var player_spawns_list = player_spawns.get_children()
-	for i in range(len(player_spawns_list)):
-		var player = backpackman.instantiate()
-		player.game_component_scene = game_mode.game_component
-		player.state_machine_scene = game_mode.state_machine
-		player.animation_tree_scene = game_mode.animation_tree
-		player.char_component_scene = characters[i].character_component
-		player.animation_player_scene = characters[i].animation_player
-		player.global_position = player_spawns_list[i].global_position
-		add_child(player)
-	
-	for child in get_children():
-		if child is PlayerEntity:
-			player_characters.append(child)
-	player_characters[0].is_current_player = true
+	for team_id in range(len(player_spawns.get_children())):
+		var player_spawns_list = player_spawns.get_children()[team_id].get_children()
+		
+		for i in range(len(characters[team_id])):
+			var player = backpackman.instantiate()
+			player.game_component_scene = game_mode.game_component
+			player.state_machine_scene = game_mode.state_machine
+			player.animation_tree_scene = game_mode.animation_tree
+			player.char_component_scene = characters[team_id][i].character_component
+			player.animation_player_scene = characters[team_id][i].animation_player
+			player.global_position = player_spawns_list[i].global_position
+			player.team_id = team_id
+			# remove second expression for multiplayer
+			if i == 0 and team_id == 0:
+				player.is_current_player = true
+			add_child(player)
+		
+		for child in get_children():
+			if child is PlayerEntity:
+				player_characters.append(child)
+		#TODO: Assign the team captains to each player's control
+		
 		
 func change_player_control_to(player_character:PlayerEntity):
 	if not player_character:
@@ -55,10 +51,6 @@ func change_player_control_to(player_character:PlayerEntity):
 				char.toggle_player_control(true)
 			else:
 				char.toggle_player_control(false)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 
 func _on_quit_pressed():

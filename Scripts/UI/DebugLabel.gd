@@ -11,6 +11,7 @@ func _process(delta):
 	var char = get_parent().char_component
 	var spell_active = char.spell_active
 	var state = get_parent().state_machine.current_state.name
+	var team_id = str(get_parent().team_id)
 	if spell_active:
 		spell_active = "Spell Active, "
 	else:
@@ -19,4 +20,4 @@ func _process(delta):
 
 		else:
 			spell_active = ""
-	text = spell_active + state
+	text = spell_active + state + " " + team_id

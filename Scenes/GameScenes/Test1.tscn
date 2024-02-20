@@ -50,11 +50,21 @@ polygon = PackedVector2Array(23, -48, 23, 45, 35, 45, 35, -48)
 
 [node name="PlayerSpawnMarkers" type="Node" parent="."]
 
-[node name="PlayerSpawn" type="Marker2D" parent="PlayerSpawnMarkers"]
+[node name="Team1" type="Node" parent="PlayerSpawnMarkers"]
+
+[node name="PlayerSpawn" type="Marker2D" parent="PlayerSpawnMarkers/Team1"]
 position = Vector2(-216, -27)
 
-[node name="PlayerSpawn2" type="Marker2D" parent="PlayerSpawnMarkers"]
+[node name="PlayerSpawn2" type="Marker2D" parent="PlayerSpawnMarkers/Team1"]
 position = Vector2(-160, 55)
+
+[node name="Team2" type="Node" parent="PlayerSpawnMarkers"]
+
+[node name="PlayerSpawn3" type="Marker2D" parent="PlayerSpawnMarkers/Team2"]
+position = Vector2(220, -35)
+
+[node name="PlayerSpawn4" type="Marker2D" parent="PlayerSpawnMarkers/Team2"]
+position = Vector2(144, 48)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
