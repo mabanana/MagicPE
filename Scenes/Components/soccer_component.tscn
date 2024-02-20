@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dywh1r04mpf0h"]
+[gd_scene load_steps=8 format=3 uid="uid://dywh1r04mpf0h"]
 
 [ext_resource type="Script" path="res://Scripts/Defaults/SoccerComponentNoAI.gd" id="1_h8rox"]
 [ext_resource type="PackedScene" uid="uid://ctl07hyhm8duk" path="res://Scenes/Entities/ball_detect.tscn" id="2_8dpjm"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="3_kirtf"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="4_4a1g1"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_star.gd" id="5_71d74"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3r8go"]
 
@@ -27,6 +30,20 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseDetect"]
 shape = SubResource("CircleShape2D_pceri")
+
+[node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("3_kirtf")
+blackboard = NodePath("@Node@18491")
+actor = NodePath("..")
+
+[node name="SelectorReactiveComposite" type="Node" parent="BeehaveTree"]
+script = ExtResource("4_4a1g1")
+
+[node name="Wait" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
+script = ExtResource("5_71d74")
+
+[node name="Chase" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
+script = ExtResource("5_71d74")
 
 [connection signal="area_entered" from="PossessDetect" to="." method="_on_possess_detect_area_entered"]
 [connection signal="area_entered" from="ChaseDetect" to="." method="_on_chase_detect_area_entered"]
