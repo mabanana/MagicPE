@@ -1,5 +1,6 @@
 extends Area2D
 var goal_text = preload("res://Scenes/UI/TestGoalTextLabel.tscn")
+@export var canvas_layer: CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,4 +15,4 @@ func _process(delta):
 func _on_body_entered(body):
 	if body is Ball and not body is FakeBall:
 		var text = goal_text.instantiate()
-		get_parent().get_node("CanvasLayer").add_child(text)
+		canvas_layer.add_child(text)

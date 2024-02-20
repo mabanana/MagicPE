@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dh0aq1dcytquo"]
+[gd_scene load_steps=3 format=3 uid="uid://dh0aq1dcytquo"]
 
+[ext_resource type="Script" path="res://Scripts/UI/InstanceTopMenu.gd" id="1_1jouo"]
 [ext_resource type="Theme" uid="uid://eqmbgyl3xufq" path="res://Assets/UI/kenneyUI-yellow.tres" id="1_7osfl"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="InstanceTopMenu" type="CanvasLayer"]
+script = ExtResource("1_1jouo")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -42,3 +44,6 @@ text = "Character Information"
 layout_mode = 2
 size_flags_stretch_ratio = 1.45
 text = "Quit"
+
+[connection signal="pressed" from="Control/PanelContainer/ColorRect/HBoxContainer/CharInfo" to="." method="_on_char_info_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/ColorRect/HBoxContainer/Quit" to="." method="_on_quit_pressed"]

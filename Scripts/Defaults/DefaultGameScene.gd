@@ -35,13 +35,13 @@ func _ready():
 			if i == 0 and team_id == 0:
 				player.is_current_player = true
 			add_child(player)
-		
+
+		#TODO: Assign the team captains to each player's control
 		for child in get_children():
 			if child is PlayerEntity:
 				player_characters.append(child)
-		#TODO: Assign the team captains to each player's control
-		
-		
+
+
 func change_player_control_to(player_character:PlayerEntity):
 	if not player_character:
 		return
@@ -55,6 +55,9 @@ func change_player_control_to(player_character:PlayerEntity):
 
 func _on_quit_pressed():
 	queue_free()
+	
+func _on_char_info_pressed():
+	pass # Replace with function body.
 
 func change_control_to_mouse():
 	change_player_control_to(get_closest_to_mouse_pos(player_characters))
