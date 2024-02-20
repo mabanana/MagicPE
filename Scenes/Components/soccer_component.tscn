@@ -1,20 +1,29 @@
-[gd_scene load_steps=8 format=3 uid="uid://dywh1r04mpf0h"]
+[gd_scene load_steps=16 format=3 uid="uid://dywh1r04mpf0h"]
 
 [ext_resource type="Script" path="res://Scripts/Defaults/SoccerComponentNoAI.gd" id="1_h8rox"]
 [ext_resource type="PackedScene" uid="uid://ctl07hyhm8duk" path="res://Scenes/Entities/ball_detect.tscn" id="2_8dpjm"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="3_kirtf"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="4_4a1g1"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_star.gd" id="5_71d74"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="6_b14o4"]
+[ext_resource type="Script" path="res://Scripts/Behavior/Leaf/BallPossessedByAlly.gd" id="7_xoqd6"]
+[ext_resource type="Script" path="res://Scripts/Behavior/Leaf/GoToMarker.gd" id="8_cf34r"]
+[ext_resource type="Script" path="res://Scripts/Behavior/Leaf/BallInRange.gd" id="8_ynhjw"]
+[ext_resource type="Script" path="res://Scripts/Behavior/Leaf/RandomPath.gd" id="10_lu801"]
+[ext_resource type="Script" path="res://Scripts/Behavior/Leaf/IsTimerTimeout.gd" id="10_rpsym"]
+[ext_resource type="Script" path="res://Scripts/Behavior/Leaf/GoToBall.gd" id="11_281xc"]
+[ext_resource type="Script" path="res://Scripts/Behavior/Leaf/PossessBall.gd" id="12_x1gqo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3r8go"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pceri"]
 radius = 60.0
 
-[node name="SoccerComponent" type="Node2D" node_paths=PackedStringArray("ball_marker")]
+[node name="SoccerComponent" type="Node2D" node_paths=PackedStringArray("ball_marker", "beehave_tree")]
 script = ExtResource("1_h8rox")
 ball_marker = NodePath("BallMarker")
 ball_detect = ExtResource("2_8dpjm")
+beehave_tree = NodePath("BeehaveTree")
 
 [node name="BallMarker" type="Marker2D" parent="."]
 position = Vector2(0, 10)
@@ -32,7 +41,9 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_pceri")
 
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+unique_name_in_owner = true
 script = ExtResource("3_kirtf")
+actor_node_path = NodePath("..")
 blackboard = NodePath("@Node@18491")
 actor = NodePath("..")
 
@@ -42,9 +53,47 @@ script = ExtResource("4_4a1g1")
 [node name="Wait" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
 script = ExtResource("5_71d74")
 
+[node name="Standby" type="Node" parent="BeehaveTree/SelectorReactiveComposite/Wait"]
+script = ExtResource("5_71d74")
+
+[node name="BallNotPossessedByAlly" type="Node" parent="BeehaveTree/SelectorReactiveComposite/Wait/Standby"]
+script = ExtResource("6_b14o4")
+
+[node name="BallPossessedByAlly" type="Node" parent="BeehaveTree/SelectorReactiveComposite/Wait/Standby/BallNotPossessedByAlly"]
+script = ExtResource("7_xoqd6")
+
+[node name="BallNotInRange" type="Node" parent="BeehaveTree/SelectorReactiveComposite/Wait/Standby"]
+script = ExtResource("6_b14o4")
+
+[node name="BallInRange" type="Node" parent="BeehaveTree/SelectorReactiveComposite/Wait/Standby/BallNotInRange"]
+script = ExtResource("8_ynhjw")
+
+[node name="Defense" type="Node" parent="BeehaveTree/SelectorReactiveComposite/Wait"]
+script = ExtResource("5_71d74")
+
+[node name="GoToMarker" type="Node" parent="BeehaveTree/SelectorReactiveComposite/Wait/Defense"]
+script = ExtResource("8_cf34r")
+
+[node name="IsTimerTimeout" type="Node" parent="BeehaveTree/SelectorReactiveComposite/Wait/Defense"]
+script = ExtResource("10_rpsym")
+
+[node name="Timer" type="Timer" parent="BeehaveTree/SelectorReactiveComposite/Wait/Defense/IsTimerTimeout"]
+wait_time = 3.0
+autostart = true
+
+[node name="RandomPath" type="Node" parent="BeehaveTree/SelectorReactiveComposite/Wait/Defense"]
+script = ExtResource("10_lu801")
+
 [node name="Chase" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
 script = ExtResource("5_71d74")
+
+[node name="GoToBall" type="Node" parent="BeehaveTree/SelectorReactiveComposite/Chase"]
+script = ExtResource("11_281xc")
+
+[node name="PossessBall" type="Node" parent="BeehaveTree/SelectorReactiveComposite/Chase"]
+script = ExtResource("12_x1gqo")
 
 [connection signal="area_entered" from="PossessDetect" to="." method="_on_possess_detect_area_entered"]
 [connection signal="area_entered" from="ChaseDetect" to="." method="_on_chase_detect_area_entered"]
 [connection signal="area_exited" from="ChaseDetect" to="." method="_on_chase_detect_area_exited"]
+[connection signal="timeout" from="BeehaveTree/SelectorReactiveComposite/Wait/Defense/IsTimerTimeout/Timer" to="BeehaveTree/SelectorReactiveComposite/Wait/Defense/IsTimerTimeout" method="_on_timer_timeout"]

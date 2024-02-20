@@ -6,10 +6,13 @@ const offset = 25
 @export var kick_spin: int = 500
 @export var kick_speed: int = 70
 @export var ball_detect: PackedScene
+@export var beehave_tree: BeehaveTree
+
 var state_machine: CharacterStateMachine
 var ball: RigidBody2D = null
 var is_chase: bool = false
 var chase_target: RigidBody2D
+
 
 func main_interact(state):
 	if state is PossessionState:
@@ -26,6 +29,11 @@ func _process(delta):
 		if state_machine.current_state is PossessionState:
 			state_machine.current_state.on_depossession()
 		ball = null
+	if get_parent().is_current_player:
+		beehave_tree.enabled = false
+	elif not get_parent().is_current_player:
+		beehave_tree.enabled = true
+	print("SoccerComponentNoAI: beehave tree enabled is ", beehave_tree.enabled)
 	
 func kick_ball(b: RigidBody2D, is_shoot: bool = true):
 	var dir = (get_global_mouse_position() - ball_marker.global_position).normalized()
