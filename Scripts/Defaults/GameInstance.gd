@@ -10,7 +10,6 @@ var team_id: int = 0
 func _ready():
 	var new_scene = game_scene.instantiate()
 	add_child(new_scene)
-	Scene.scene = get_child(0)
 
 func _on_child_exiting_tree(node):
 	if node is GameScene:

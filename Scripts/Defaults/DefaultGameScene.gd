@@ -6,12 +6,15 @@ const char_switch_radius: int = 40
 var game_mode: GameMode
 var characters: Array
 var player_characters: Array[PlayerEntity]
+var game_ball: Ball
+var possession_team: int
 
 @export var player_spawns: Node
 @onready var backpackman = preload("res://Scenes/Entities/BackpackMan.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Scene.scene = self
 	game_mode = get_parent().game_mode
 	characters = get_parent().characters
 	var c = get_parent().characters[0][0]
@@ -21,6 +24,7 @@ func _ready():
 		var new_ent = entity.scene.instantiate()
 		new_ent.texture = entity.sprite
 		add_child(new_ent)
+	game_ball = get_node("Ball")
 	
 	for team_id in range(len(player_spawns.get_children())):
 		var player_spawns_list = player_spawns.get_children()[team_id].get_children()
@@ -76,3 +80,10 @@ func get_closest_to_mouse_pos(arr:Array):
 		if distance < closest[1]:
 			closest = [i, distance]
 	return arr[closest[0]] if closest[1] > char_switch_radius else null
+
+func connect_possession_signal(soccer_node):
+	soccer_node.connect("ball_possessed", _on_ball_possessed)
+
+func _on_ball_possessed(team_id):
+	possession_team = team_id
+	print("GameScene: ball has been possessed by team: ", team_id)

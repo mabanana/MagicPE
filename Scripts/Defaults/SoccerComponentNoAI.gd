@@ -13,6 +13,11 @@ var ball: RigidBody2D = null
 var is_chase: bool = false
 var chase_target: RigidBody2D
 
+signal ball_possessed
+
+func _ready():
+	Scene.scene.connect_possession_signal(self)
+
 
 func main_interact(state):
 	if state is PossessionState:
@@ -33,7 +38,6 @@ func _process(delta):
 		beehave_tree.enabled = false
 	elif not get_parent().is_current_player:
 		beehave_tree.enabled = true
-	print("SoccerComponentNoAI: beehave tree enabled is ", beehave_tree.enabled)
 	
 func kick_ball(b: RigidBody2D, is_shoot: bool = true):
 	var dir = (get_global_mouse_position() - ball_marker.global_position).normalized()
@@ -61,6 +65,8 @@ func depossess_ball(anim_name = null):
 	ball = null
 
 func on_possess_ball():
+	emit_signal("ball_possessed", get_parent().team_id)
+	print("SoccerComponent: ball_possessed emitted")
 	on_player_control()
 
 func on_player_control_lost():

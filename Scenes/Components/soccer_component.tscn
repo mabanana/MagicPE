@@ -44,7 +44,7 @@ shape = SubResource("CircleShape2D_pceri")
 unique_name_in_owner = true
 script = ExtResource("3_kirtf")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@18491")
+blackboard = NodePath("@Node@18497")
 actor = NodePath("..")
 
 [node name="SelectorReactiveComposite" type="Node" parent="BeehaveTree"]
