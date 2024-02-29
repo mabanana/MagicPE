@@ -24,9 +24,8 @@ func main_interact(state):
 		kick_ball(ball)
 		depossess_ball("Kick")
 	if state is IdleState:
-		if not has_node("BallDetect"):
-			var inst = ball_detect.instantiate()
-			add_child(inst)
+		instantiate_ball_detect()
+
 
 func _process(delta):
 	ball_marker.position.x = get_parent().facing * offset
@@ -48,6 +47,11 @@ func kick_ball(b: RigidBody2D, is_shoot: bool = true):
 		b.apply_impulse(dir*kick_speed)
 		print("SoccerComponent: ", b.name, " was kicked.")
 	#ball.apply_torque_impulse(kick_spin*dir.angle())
+
+func instantiate_ball_detect():
+	if not has_node("BallDetect"):
+		var inst = ball_detect.instantiate()
+		add_child(inst)
 
 func _on_ball_entered(area):
 	var body = area.get_parent()

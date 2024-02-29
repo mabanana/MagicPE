@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://8ejq0yncv5il"]
+[gd_scene load_steps=5 format=3 uid="uid://bnl1cgwlumtvg"]
 
 [ext_resource type="Script" path="res://Scripts/Defaults/PlayerEnitity.gd" id="1_ua6g4"]
 [ext_resource type="Resource" uid="uid://ce2rjw07aq50o" path="res://Resources/OtherEntities/PlayerControlParticle.tres" id="2_rxh1m"]

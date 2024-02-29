@@ -7,7 +7,7 @@ var game_mode: GameMode
 var characters: Array
 var player_characters: Array[PlayerEntity]
 var game_ball: Ball
-var possession_team: int
+var possession_team: int = -1
 
 @export var player_spawns: Node
 @onready var backpackman = preload("res://Scenes/Entities/BackpackMan.tscn")

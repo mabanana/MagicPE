@@ -5,9 +5,9 @@ var marker_location: Vector2
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	if not marker_location:
-		marker_location = actor.get_parent().global_position
-	var direction = marker_location - actor.get_parent().global_position
-	if direction.length() < 10:
+		marker_location = actor.global_position
+	var direction = marker_location - actor.global_position
+	if direction.length() < 5:
 		direction = Vector2(0,0)
 		return SUCCESS
 	direction.normalized()
