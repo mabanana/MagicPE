@@ -9,6 +9,7 @@ var player_characters: Array[PlayerEntity]
 var game_ball: Ball
 var possession_team: int = -1
 var score: Array = [0,0]
+var player_char
 
 @export var player_spawns: Node
 @onready var backpackman = preload("res://Scenes/Entities/BackpackMan.tscn")
@@ -43,6 +44,7 @@ func _ready():
 			# remove second expression for multiplayer
 			if i == 0 and team_id == 0:
 				player.is_current_player = true
+				player_char = player
 				player.control_particle.show()
 			add_child(player)
 
@@ -59,6 +61,7 @@ func change_player_control_to(player_character:PlayerEntity):
 		for char in player_characters:
 			if char == player_character:
 				char.toggle_player_control(true)
+				player_char = char
 			else:
 				char.toggle_player_control(false)
 
@@ -101,4 +104,18 @@ func _on_team_1_goal_body_entered(body):
 	goal_score(1)
 
 func goal_score(team_id):
+	player_char.is_current_player = false
+	$%Camera2D.ball_freed = true
+	game_ball.queue_free()
 	score[0] += 1
+	%Timer.start(5)
+	await %Timer.timeout
+	var new_ent = game_mode.game_entities[0].scene.instantiate()
+	new_ent.texture = game_mode.game_entities[0].sprite
+	add_child(new_ent)
+	game_ball = get_node("Ball")
+	player_char.is_current_player = true
+	
+	$%Camera2D.ball = game_ball
+	$%Camera2D.ball_freed = false
+

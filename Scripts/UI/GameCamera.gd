@@ -1,5 +1,6 @@
 extends Camera2D
 var ball
+var ball_freed = false
 @export var x_max_offset: int = 300
 @export var y_max_offset: int = 180
 
@@ -11,7 +12,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if ball:
+	if ball and not ball_freed:
 		position = ball.position
 		if position.x > x_max_offset:
 			position.x = x_max_offset

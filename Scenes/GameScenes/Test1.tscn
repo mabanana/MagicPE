@@ -14,6 +14,9 @@ size = Vector2(12, 93)
 script = ExtResource("1_0g5iq")
 player_spawns = NodePath("PlayerSpawnMarkers")
 
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+
 [node name="Characters" type="Node" parent="."]
 unique_name_in_owner = true
 
