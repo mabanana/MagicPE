@@ -8,6 +8,7 @@ var characters: Array
 var player_characters: Array[PlayerEntity]
 var game_ball: Ball
 var possession_team: int = -1
+var score: Array = [0,0]
 
 @export var player_spawns: Node
 @onready var backpackman = preload("res://Scenes/Entities/BackpackMan.tscn")
@@ -25,6 +26,7 @@ func _ready():
 		new_ent.texture = entity.sprite
 		add_child(new_ent)
 	game_ball = get_node("Ball")
+	$%Camera2D.ball = game_ball
 	
 	for team_id in range(len(player_spawns.get_children())):
 		var player_spawns_list = player_spawns.get_children()[team_id].get_children()
@@ -51,7 +53,7 @@ func _ready():
 
 
 func change_player_control_to(player_character:PlayerEntity):
-	if not player_character:
+	if not player_character or player_character.team_id != 0:
 		return
 	if not player_character.is_current_player:
 		for char in player_characters:
@@ -90,3 +92,13 @@ func _on_ball_possessed(team_id):
 	possession_team = team_id
 	if team_id != -1:
 		print("GameScene: ball has been possessed by team: ", team_id)
+
+
+func _on_team_0_goal_body_entered(body):
+	goal_score(0)
+
+func _on_team_1_goal_body_entered(body):
+	goal_score(1)
+
+func goal_score(team_id):
+	score[0] += 1

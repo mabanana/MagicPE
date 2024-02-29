@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ib4xlod7bufl"]
+[gd_scene load_steps=7 format=3 uid="uid://ib4xlod7bufl"]
 
 [ext_resource type="Script" path="res://Scripts/Defaults/DefaultGameScene.gd" id="1_0g5iq"]
+[ext_resource type="Script" path="res://Scripts/UI/GameCamera.gd" id="2_tjh54"]
 [ext_resource type="PackedScene" uid="uid://dh0aq1dcytquo" path="res://Scenes/UI/InstanceTopMenu.tscn" id="3_27enk"]
 [ext_resource type="Script" path="res://Scripts/Objects/TestGoal.gd" id="3_kci6y"]
 
@@ -24,6 +25,7 @@ freeze = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Court"]
 modulate = Color(0.941176, 0.796078, 0.631373, 1)
+position = Vector2(0, 11)
 scale = Vector2(-1105.02, 612.258)
 texture = SubResource("CanvasTexture_go6d0")
 
@@ -32,35 +34,40 @@ scale = Vector2(1.91285, 1.9298)
 polygon = PackedVector2Array(-288, -154, 287, -155, 288, 162, -290, 162, -289, -154, -314, -155, -313, 189, 324, 183, 322, -187, 221.298, -187, -314, -187, -314, -155)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+zoom = Vector2(1.5, 1.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("2_tjh54")
 
-[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("canvas_layer")]
+[node name="Team1Goal" type="Area2D" parent="." node_paths=PackedStringArray("canvas_layer")]
 position = Vector2(260, 7)
 collision_layer = 16
 collision_mask = 2
 script = ExtResource("3_kci6y")
 canvas_layer = NodePath("../InstanceTopMenu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Team1Goal"]
 position = Vector2(287, -0.5)
 shape = SubResource("RectangleShape2D_euq7t")
 
-[node name="Polygon2D" type="Polygon2D" parent="Area2D"]
+[node name="Polygon2D" type="Polygon2D" parent="Team1Goal"]
 position = Vector2(258, 1)
 color = Color(1, 0.443137, 1, 1)
 polygon = PackedVector2Array(23, -48, 23, 45, 35, 45, 35, -48)
 
-[node name="Area2D2" type="Area2D" parent="." node_paths=PackedStringArray("canvas_layer")]
+[node name="Team0Goal" type="Area2D" parent="." node_paths=PackedStringArray("canvas_layer")]
 position = Vector2(-835, 10)
 collision_layer = 16
 collision_mask = 2
 script = ExtResource("3_kci6y")
 canvas_layer = NodePath("../InstanceTopMenu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Team0Goal"]
 position = Vector2(287, -0.5)
 shape = SubResource("RectangleShape2D_euq7t")
 
-[node name="Polygon2D" type="Polygon2D" parent="Area2D2"]
+[node name="Polygon2D" type="Polygon2D" parent="Team0Goal"]
 position = Vector2(258, 1)
 color = Color(1, 0.443137, 1, 1)
 polygon = PackedVector2Array(23, -48, 23, 45, 35, 45, 35, -48)
@@ -85,7 +92,9 @@ position = Vector2(502, 11)
 
 [node name="InstanceTopMenu" parent="." instance=ExtResource("3_27enk")]
 
-[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
-[connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]
+[connection signal="body_entered" from="Team1Goal" to="." method="_on_team_1_goal_body_entered"]
+[connection signal="body_entered" from="Team1Goal" to="Team1Goal" method="_on_body_entered"]
+[connection signal="body_entered" from="Team0Goal" to="." method="_on_team_0_goal_body_entered"]
+[connection signal="body_entered" from="Team0Goal" to="Team0Goal" method="_on_body_entered"]
 [connection signal="char_info_pressed" from="InstanceTopMenu" to="." method="_on_char_info_pressed"]
 [connection signal="quit_pressed" from="InstanceTopMenu" to="." method="_on_quit_pressed"]

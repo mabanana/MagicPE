@@ -7,6 +7,42 @@
 [node name="InstanceTopMenu" type="CanvasLayer"]
 script = ExtResource("1_1jouo")
 
+[node name="Control2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="Control2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -7.5
+offset_right = 7.5
+offset_bottom = 26.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control2/PanelContainer2"]
+custom_minimum_size = Vector2(10, 20)
+layout_mode = 2
+
+[node name="Team0Score" type="Label" parent="Control2/PanelContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Colon" type="Label" parent="Control2/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+text = ":"
+
+[node name="Team1Score" type="Label" parent="Control2/PanelContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 1
