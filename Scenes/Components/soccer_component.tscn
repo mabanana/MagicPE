@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dywh1r04mpf0h"]
+[gd_scene load_steps=17 format=3 uid="uid://dywh1r04mpf0h"]
 
 [ext_resource type="Script" path="res://Scripts/Defaults/SoccerComponentNoAI.gd" id="1_h8rox"]
 [ext_resource type="PackedScene" uid="uid://ctl07hyhm8duk" path="res://Scenes/Entities/ball_detect.tscn" id="2_8dpjm"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://Scripts/Behavior/Leaf/BallPossessedByAlly.gd" id="7_xoqd6"]
 [ext_resource type="Script" path="res://Scripts/Behavior/Leaf/GoToMarker.gd" id="8_cf34r"]
 [ext_resource type="Script" path="res://Scripts/Behavior/Leaf/BallInRange.gd" id="8_ynhjw"]
-[ext_resource type="Script" path="res://Scripts/Behavior/Leaf/RandomPath.gd" id="10_lu801"]
 [ext_resource type="Script" path="res://Scripts/Behavior/Leaf/IsTimerTimeout.gd" id="10_rpsym"]
 [ext_resource type="Script" path="res://Scripts/Behavior/Leaf/GoToBall.gd" id="11_281xc"]
 [ext_resource type="Script" path="res://Scripts/Behavior/Leaf/PossessBall.gd" id="12_x1gqo"]
@@ -19,7 +18,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_3r8go"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pceri"]
-radius = 60.0
+radius = 120.0
 
 [node name="SoccerComponent" type="Node2D" node_paths=PackedStringArray("ball_marker", "beehave_tree")]
 script = ExtResource("1_h8rox")
@@ -78,9 +77,6 @@ script = ExtResource("10_rpsym")
 
 [node name="Timer" type="Timer" parent="BeehaveTree/Either/Wait/Defense/IsTimerTimeout"]
 autostart = true
-
-[node name="RandomPath" type="Node" parent="BeehaveTree/Either/Wait/Defense"]
-script = ExtResource("10_lu801")
 
 [node name="Chase" type="Node" parent="BeehaveTree/Either"]
 script = ExtResource("4_4a1g1")

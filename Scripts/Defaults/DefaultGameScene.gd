@@ -41,6 +41,7 @@ func _ready():
 			# remove second expression for multiplayer
 			if i == 0 and team_id == 0:
 				player.is_current_player = true
+				player.control_particle.show()
 			add_child(player)
 
 	#TODO: Assign the team captains to each player's control
@@ -68,6 +69,7 @@ func _on_char_info_pressed():
 	pass # Replace with function body.
 
 func change_control_to_mouse():
+	return
 	change_player_control_to(get_closest_to_mouse_pos(player_characters))
 
 func get_closest_to_mouse_pos(arr:Array):
@@ -86,4 +88,5 @@ func connect_possession_signal(soccer_node):
 
 func _on_ball_possessed(team_id):
 	possession_team = team_id
-	print("GameScene: ball has been possessed by team: ", team_id)
+	if team_id != -1:
+		print("GameScene: ball has been possessed by team: ", team_id)

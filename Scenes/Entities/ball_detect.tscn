@@ -8,7 +8,6 @@ size = Vector2(30, 20)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o7bd4"]
 
 [node name="BallDetect" type="Area2D"]
-position = Vector2(0, 10)
 collision_mask = 2
 monitorable = false
 script = ExtResource("1_jnl8u")

@@ -6,10 +6,11 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_egllh"]
 
-[node name="BackPackMan" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d")]
+[node name="BackPackMan" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d", "control_particle")]
 collision_mask = 4
 script = ExtResource("1_ua6g4")
 sprite_2d = NodePath("Sprite")
+control_particle = NodePath("ControlParticle")
 on_player_control_particle = ExtResource("2_rxh1m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -28,3 +29,23 @@ offset_bottom = 26.0
 grow_horizontal = 2
 text = "TEXT"
 script = ExtResource("2_vkivc")
+
+[node name="ControlParticle" type="CPUParticles2D" parent="."]
+visible = false
+lifetime = 0.2
+emission_shape = 1
+emission_sphere_radius = 32.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 12.0
+orbit_velocity_min = 0.2
+orbit_velocity_max = 0.2
+linear_accel_min = 20.0
+linear_accel_max = 20.0
+damping_max = 52.809
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+color = Color(0.85098, 1, 0.882353, 0.294118)
+hue_variation_min = 0.36
+hue_variation_max = 0.36

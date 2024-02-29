@@ -5,6 +5,7 @@ class_name PlayerEntity
 @export var acceleration: int = 60
 @export var decceleration: int = 20
 @export var sprite_2d: Sprite2D
+@export var control_particle: CPUParticles2D
 
 @export var on_player_control_particle: ParticleResource
 
@@ -58,6 +59,14 @@ func _ready():
 		game_component.on_player_control()	
 	
 func _physics_process(delta):
+	if is_current_player:
+		if state_machine.is_can_move():
+			x_direction = Input.get_axis("ui_left", "ui_right")
+			y_direction = Input.get_axis("ui_up", "ui_down")
+		else:
+			x_direction = 0
+			y_direction = 0
+	
 	if x_direction or y_direction:
 		var acc = (sqrt(0.5)*acceleration) if (x_direction and y_direction) else acceleration 
 		velocity.x = move_toward(velocity.x, x_direction * move_speed, acceleration)
@@ -74,13 +83,16 @@ func _physics_process(delta):
 	state_machine.state_machine_process(delta)
 	move_and_slide()
 
+
 func toggle_player_control(toggle_to = false):
 	is_current_player = toggle_to
 	if not is_current_player:
 		game_component.on_player_control_lost()
+		control_particle.hide()
 	else:
 		var particle = on_player_control_particle.scene.instantiate()
 		add_child(particle)
+		control_particle.show()
 	x_direction = 0
 	y_direction = 0
 
@@ -105,13 +117,6 @@ func pass_blend_position():
 
 func _input(event):
 	if is_current_player:
-		if state_machine.is_can_move():
-			x_direction = Input.get_axis("ui_left", "ui_right")
-			y_direction = Input.get_axis("ui_up", "ui_down")
-		else:
-			x_direction = 0
-			y_direction = 0
-		
 		if event.is_action_pressed("ui_accept"):
 			pass
 		

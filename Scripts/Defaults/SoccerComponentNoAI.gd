@@ -82,7 +82,8 @@ func on_player_control():
 
 func _on_possess_detect_area_entered(area):
 	if area.get_parent() is Ball:
-		pass
+		if state_machine.current_state is IdleState:
+			state_machine.current_state.main_interact()
 
 
 func _on_chase_detect_area_entered(area):
@@ -93,7 +94,6 @@ func _on_chase_detect_area_entered(area):
 func _on_chase_detect_area_exited(area):
 	if area.get_parent() is Ball:
 		is_chase = false
-		chase_target = null
 
 func chase():
 	if is_chase:

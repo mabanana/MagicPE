@@ -30,6 +30,7 @@ func _process(delta):
 		global_position.y = move_toward(global_position.y, possesser.global_position.y, turn_speed*delta)
 	if not possesser:
 		possessed = false
+		Scene.scene._on_ball_possessed(-1)
 
 
 func _on_area_2d_body_entered(body):
@@ -40,9 +41,10 @@ func _on_area_2d_body_entered(body):
 
 
 func possess(marker):
-	possessed = true
-	sleeping = true
-	assign_possess(marker)
+	if not marker.get_parent().ball:
+		possessed = true
+		sleeping = true
+		assign_possess(marker)
 	
 func depossess():
 	possessed = false
