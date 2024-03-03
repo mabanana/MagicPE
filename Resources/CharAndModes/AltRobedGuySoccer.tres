@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CharacterModeResource" load_steps=6 format=3 uid="uid://bjbv8pqn8r8qq"]
+
+[ext_resource type="PackedScene" uid="uid://b72pvnxwy3t82" path="res://Scenes/Components/alt_robed_guy_animation_player.tscn" id="1_30drf"]
+[ext_resource type="Script" path="res://Scripts/Resources/CharacterModeResource.gd" id="1_bsh3f"]
+[ext_resource type="PackedScene" uid="uid://dy8wxelhw7hmu" path="res://Scenes/Components/trickster_component.tscn" id="2_7t3lw"]
+[ext_resource type="Resource" uid="uid://ddg6trdlxbwn" path="res://Resources/CharAndModes/AltRobedGuy.tres" id="3_x2o3p"]
+[ext_resource type="Texture2D" uid="uid://b7b3mcfluypwv" path="res://Assets/Sprites/AltRobedGuy Icon.png" id="4_k1nlh"]
+
+[resource]
+script = ExtResource("1_bsh3f")
+animation_player = ExtResource("1_30drf")
+character_component = ExtResource("2_7t3lw")
+character_resource = ExtResource("3_x2o3p")
+icon = ExtResource("4_k1nlh")
+name = "Grey Robed Guy"

@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3fg8wcro1mc4"]
+[gd_scene load_steps=7 format=3 uid="uid://b72pvnxwy3t82"]
 
-[ext_resource type="Texture2D" uid="uid://b8haoxe3gpfc4" path="res://Assets/Sprites/Magic PE Concept Art - Robed Student-Sheet.png" id="1_1plol"]
+[ext_resource type="Texture2D" uid="uid://b2seiolxgqqc7" path="res://Assets/Sprites/Alt Robed Student-Sheet.png" id="1_y3ydq"]
 
 [sub_resource type="Animation" id="Animation_h8cmt"]
 resource_name = "Idle"
@@ -15,7 +15,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_1plol")]
+"values": [ExtResource("1_y3ydq")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -67,7 +67,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_1plol")]
+"values": [ExtResource("1_y3ydq")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -119,7 +119,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_1plol")]
+"values": [ExtResource("1_y3ydq")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -172,7 +172,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_1plol")]
+"values": [ExtResource("1_y3ydq")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -219,7 +219,7 @@ _data = {
 "Run": SubResource("Animation_yi6dw")
 }
 
-[node name="robed_guy_animation_player" type="AnimationPlayer"]
+[node name="alt_robed_guy_animation_player" type="AnimationPlayer"]
 libraries = {
 "": SubResource("AnimationLibrary_2ftqi")
 }

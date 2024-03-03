@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="GameMode" load_steps=9 format=3 uid="uid://bcw6qgywnh5sj"]
+[gd_resource type="Resource" script_class="GameMode" load_steps=10 format=3 uid="uid://bcw6qgywnh5sj"]
 
 [ext_resource type="PackedScene" uid="uid://cu1i4mg6turmk" path="res://Scenes/Components/soccer_animation_tree.tscn" id="1_2mfj8"]
 [ext_resource type="Resource" uid="uid://c1ba7yc4b7une" path="res://Resources/CharAndModes/BackPackManSoccer.tres" id="1_8xkt3"]
 [ext_resource type="Resource" uid="uid://1f8swqa1yxmy" path="res://Resources/CharAndModes/RobedGuySoccer.tres" id="2_j5rlv"]
 [ext_resource type="PackedScene" uid="uid://dywh1r04mpf0h" path="res://Scenes/Components/soccer_component.tscn" id="2_yfo4x"]
+[ext_resource type="Resource" uid="uid://bjbv8pqn8r8qq" path="res://Resources/CharAndModes/AltRobedGuySoccer.tres" id="3_m4hox"]
 [ext_resource type="Resource" uid="uid://b5gulcgmgfwu5" path="res://Resources/OtherEntities/SoccerBall.tres" id="3_tsbk5"]
 [ext_resource type="Texture2D" uid="uid://bftht6sy1lt3s" path="res://Assets/Sprites/SoccerBall.png" id="4_uob04"]
 [ext_resource type="Script" path="res://Scripts/Resources/GameMode.gd" id="5_lnv41"]
@@ -17,4 +18,4 @@ game_component = ExtResource("2_yfo4x")
 state_machine = ExtResource("6_8y32e")
 animation_tree = ExtResource("1_2mfj8")
 game_entities = Array[Resource("res://Scripts/Resources/GameEntity.gd")]([ExtResource("3_tsbk5")])
-all_char = Array[Resource("res://Scripts/Resources/CharacterModeResource.gd")]([ExtResource("1_8xkt3"), ExtResource("2_j5rlv")])
+all_char = Array[Resource("res://Scripts/Resources/CharacterModeResource.gd")]([ExtResource("1_8xkt3"), ExtResource("2_j5rlv"), ExtResource("3_m4hox")])
