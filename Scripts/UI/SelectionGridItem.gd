@@ -1,22 +1,25 @@
 extends TextureButton
 class_name SelectionGridItem
 @export var resource: Resource
+var selected: bool
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	modulate.a = 220
 	texture_normal = resource.icon
-
+	selected = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if selected:
+		modulate.a = 255
 
 
 func _on_pressed():
 	print("SelectionGridItem: button pressed, this button is for ")
 	get_scene().select(resource)
-
+	selected = true
 
 func get_scene(node = self, scene_type = "CharacterSelectScene"):
 	var parent = node.get_parent()

@@ -4,16 +4,15 @@
 [ext_resource type="Resource" uid="uid://bddl1wxkt3kxm" path="res://Resources/CharAndModes/BackpackMan.tres" id="2_t8q3c"]
 
 [node name="TextureButton" type="TextureButton"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(5, 5)
 size_flags_horizontal = 3
 size_flags_vertical = 3
-stretch_mode = 0
+stretch_mode = 4
 script = ExtResource("1_kla0n")
 resource = ExtResource("2_t8q3c")
 

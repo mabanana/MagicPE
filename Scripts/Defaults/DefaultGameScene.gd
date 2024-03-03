@@ -21,8 +21,6 @@ func _ready():
 	Scene.scene = self
 	game_mode = get_parent().game_mode
 	characters = get_parent().characters
-	var c = get_parent().characters[0][0]
-	characters = [[c,c],[c,c]]
 	
 	for entity in game_mode.game_entities:
 		var new_ent = entity.scene.instantiate()
