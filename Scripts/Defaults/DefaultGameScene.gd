@@ -11,6 +11,8 @@ var possession_team: int = -1
 var score: Array = [0,0]
 var player_char
 
+@export var announcer: GameAnnouncer
+@export var ball_spawn: Marker2D
 @export var player_spawns: Node
 @onready var backpackman = preload("res://Scenes/Entities/BackpackMan.tscn")
 
@@ -25,8 +27,10 @@ func _ready():
 	for entity in game_mode.game_entities:
 		var new_ent = entity.scene.instantiate()
 		new_ent.texture = entity.sprite
+		new_ent.global_position = ball_spawn.global_position
 		add_child(new_ent)
 	game_ball = get_node("Ball")
+	game_ball.spawn = ball_spawn
 	$%Camera2D.ball = game_ball
 	
 	for team_id in range(len(player_spawns.get_children())):
@@ -103,19 +107,26 @@ func _on_team_0_goal_body_entered(body):
 func _on_team_1_goal_body_entered(body):
 	goal_score(1)
 
+#TODO: Replace with a BusyState scripted animation
 func goal_score(team_id):
-	player_char.is_current_player = false
-	$%Camera2D.ball_freed = true
-	game_ball.queue_free()
 	score[0] += 1
-	%Timer.start(5)
-	await %Timer.timeout
-	var new_ent = game_mode.game_entities[0].scene.instantiate()
-	new_ent.texture = game_mode.game_entities[0].sprite
-	add_child(new_ent)
-	game_ball = get_node("Ball")
-	player_char.is_current_player = true
+	game_ball._on_enter_goal()
+	player_char.is_current_player = false
+	announcer.display_text("GOAL!!!")
+	await announcer.announcer_finished
 	
-	$%Camera2D.ball = game_ball
-	$%Camera2D.ball_freed = false
+	game_ball._on_game_start()
+	
+	
+	announcer.display_text("ready...",2)
+	await announcer.announcer_finished
+	announcer.display_text("3",5)
+	await announcer.announcer_finished
+	announcer.display_text("2",5)
+	await announcer.announcer_finished
+	announcer.display_text("1",5)
+	await announcer.announcer_finished
+	
+	announcer.display_text("START!!", 10)
 
+	player_char.is_current_player = true

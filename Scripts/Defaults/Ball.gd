@@ -1,11 +1,16 @@
 extends RigidBody2D
 class_name Ball
-var possessed: bool
-var possesser: Marker2D
-const turn_speed: int = 350
-const spin_multiplier: int = 150
-var texture
+
+@export var turn_speed: int = 350
+@export var spin_multiplier: int = 150
 @export var sprite: Sprite2D
+@export var hitbox: Area2D
+
+var possessed: bool
+var active: bool = true
+var possesser: Marker2D
+var spawn: Marker2D
+var texture
 
 func on_ready():
 	pass
@@ -41,16 +46,28 @@ func _on_area_2d_body_entered(body):
 
 
 func possess(marker):
-	if not marker.get_parent().ball:
+	if active and not marker.get_parent().ball:
 		possessed = true
-		sleeping = true
 		assign_possess(marker)
 	
 func depossess():
 	possessed = false
-	sleeping = false
 	possesser = null
 
 func assign_possess(marker):
 	Scene.scene.change_player_control_to(marker.get_parent().get_parent())
 	possesser = marker
+
+func _on_enter_goal():
+	active = false
+	depossess()
+	possesser = spawn
+	possessed = true
+	hitbox.monitorable = false
+	hitbox.monitoring = false
+
+func _on_game_start():
+	active = true
+	depossess()
+	hitbox.monitorable = true
+	hitbox.monitoring = true

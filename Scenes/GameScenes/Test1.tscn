@@ -1,17 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://ib4xlod7bufl"]
+[gd_scene load_steps=8 format=3 uid="uid://ib4xlod7bufl"]
 
 [ext_resource type="Script" path="res://Scripts/Defaults/DefaultGameScene.gd" id="1_0g5iq"]
 [ext_resource type="Script" path="res://Scripts/UI/GameCamera.gd" id="2_tjh54"]
 [ext_resource type="PackedScene" uid="uid://dh0aq1dcytquo" path="res://Scenes/UI/InstanceTopMenu.tscn" id="3_27enk"]
 [ext_resource type="Script" path="res://Scripts/Objects/TestGoal.gd" id="3_kci6y"]
+[ext_resource type="PackedScene" uid="uid://cnrrkmr4msivv" path="res://Scenes/UI/game_announcer.tscn" id="5_mhu35"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_go6d0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_euq7t"]
 size = Vector2(12, 93)
 
-[node name="Test1" type="Node2D" node_paths=PackedStringArray("player_spawns")]
+[node name="Test1" type="Node2D" node_paths=PackedStringArray("announcer", "ball_spawn", "player_spawns")]
 script = ExtResource("1_0g5iq")
+announcer = NodePath("GameAnnouncer")
+ball_spawn = NodePath("BallSpawn")
 player_spawns = NodePath("PlayerSpawnMarkers")
 
 [node name="Timer" type="Timer" parent="."]
@@ -42,6 +45,8 @@ zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("2_tjh54")
+
+[node name="BallSpawn" type="Marker2D" parent="."]
 
 [node name="Team1Goal" type="Area2D" parent="." node_paths=PackedStringArray("canvas_layer")]
 position = Vector2(260, 7)
@@ -75,6 +80,8 @@ position = Vector2(258, 1)
 color = Color(1, 0.443137, 1, 1)
 polygon = PackedVector2Array(23, -48, 23, 45, 35, 45, 35, -48)
 
+[node name="InstanceTopMenu" parent="." instance=ExtResource("3_27enk")]
+
 [node name="PlayerSpawnMarkers" type="Node" parent="."]
 
 [node name="Team1" type="Node" parent="PlayerSpawnMarkers"]
@@ -93,7 +100,7 @@ position = Vector2(187, -3)
 [node name="PlayerSpawn4" type="Marker2D" parent="PlayerSpawnMarkers/Team2"]
 position = Vector2(502, 11)
 
-[node name="InstanceTopMenu" parent="." instance=ExtResource("3_27enk")]
+[node name="GameAnnouncer" parent="." instance=ExtResource("5_mhu35")]
 
 [connection signal="body_entered" from="Team1Goal" to="." method="_on_team_1_goal_body_entered"]
 [connection signal="body_entered" from="Team1Goal" to="Team1Goal" method="_on_body_entered"]

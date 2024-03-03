@@ -2,7 +2,7 @@ extends Camera2D
 var ball
 var ball_freed = false
 @export var x_max_offset: int = 300
-@export var y_max_offset: int = 180
+@export var y_max_offset: int = 100
 
 
 # Called when the node enters the scene tree for the first time.

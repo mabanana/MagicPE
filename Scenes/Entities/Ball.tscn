@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://lnfoibag74he"]
+[gd_scene load_steps=5 format=3 uid="uid://lnfoibag74he"]
 
 [ext_resource type="Script" path="res://Scripts/Defaults/Ball.gd" id="1_xhe8s"]
 
@@ -7,12 +7,10 @@ bounce = 0.7
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h3tqo"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pa46p"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_822gk"]
 radius = 11.0
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("sprite")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("sprite", "hitbox")]
 collision_layer = 2
 collision_mask = 6
 mass = 0.1
@@ -24,13 +22,13 @@ freeze_mode = 1
 linear_damp = 1.0
 script = ExtResource("1_xhe8s")
 sprite = NodePath("Sprite2D")
+hitbox = NodePath("Area2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_h3tqo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -5.96046e-07)
-texture = SubResource("PlaceholderTexture2D_pa46p")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
