@@ -24,16 +24,22 @@ func _ready():
 		var new_item = grid_item_scene.instantiate()
 		new_item.resource = mode
 		game_modes_grid.add_child(new_item)
-	
-	selected_chars = []
+	reset_chars()
 
+func reset_chars():
+	selected_chars = []
+	for i in range(number_of_teams):
+		selected_chars.append([])
+	teams_full = false
+	current_team_id = 0
+	
+	
 func game_mode_selected(resource):
 	selected_mode = resource
 	print("CharacterSelect: ", resource.name, " added to mode selection")
 	for child in characters_grid.get_children():
 		child.queue_free()
-		selected_chars = []
-		teams_full = false
+		reset_chars()
 		print("CharacterSelect: character grid freed")
 	for char in resource.all_char:
 		var new_item = grid_item_scene.instantiate()
@@ -42,15 +48,12 @@ func game_mode_selected(resource):
 
 func char_selected(resource):
 	if current_team_id < number_of_teams:
-		if current_team_id > len(selected_chars)-1:
-			selected_chars.append([])
-		if  resource not in selected_chars[current_team_id] and len(selected_chars[current_team_id]) < team_size:
+		if resource not in selected_chars[current_team_id] and len(selected_chars[current_team_id]) < team_size:
 			selected_chars[current_team_id].append(resource)
 		if len(selected_chars[current_team_id]) >= team_size:
 			current_team_id += 1
 			if current_team_id >= number_of_teams:
 				teams_full = true
-			
 		print("CharacterSelect: ", resource.name, " added to character selection")
 
 func select(resource: Resource):
@@ -66,12 +69,13 @@ func _process(delta):
 		continue_button.show()
 	else:
 		continue_button.hide()
-	var selection_grids = selection_grid_container.get_children()
 	
+	var selection_grids = selection_grid_container.get_children()
 	if selected_chars:
-		for i in range(len(selected_chars)):
+		for i in range(number_of_teams):
 			for child in selection_grids[i].get_children():
-				child.queue_free()
+				if child is SelectionGridItem:
+					child.queue_free()
 			for char in selected_chars[i]:
 				var new_item = grid_item_scene.instantiate()
 				new_item.resource = char
