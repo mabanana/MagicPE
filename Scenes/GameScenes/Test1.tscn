@@ -41,7 +41,6 @@ polygon = PackedVector2Array(-288, -154, 287, -155, 288, 162, -290, 162, -289, -
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
-zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("2_tjh54")
