@@ -16,13 +16,9 @@ var z
 @export var min_zoom: float = 0.8
 
 
-
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -35,7 +31,6 @@ func _process(delta):
 	
 	center = find_center()
 	z = find_zoom()
-	print(z)
 	position = lerp(position, center, move_speed)
 	zoom = lerp(zoom, Vector2.ONE * z, zoom_speed)
 	
@@ -52,7 +47,6 @@ func find_center():
 		return Vector2(0,0)
 	if len(targets) == 1:
 		return targets[0].position
-	
 	var center = Vector2.ZERO
 	for x in targets:
 		center += x.position
@@ -60,9 +54,9 @@ func find_center():
 	
 	return center
 
+
 func find_zoom():
 	var r = Rect2(center, Vector2.ONE)
-	
 	for target in targets:
 		r = r.expand(target.position)
 	r = r.grow_individual(margin.x, margin.y, margin.x, margin.y)
