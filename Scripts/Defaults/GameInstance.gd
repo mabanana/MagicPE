@@ -8,10 +8,13 @@ var game_map
 var team_id: int = 0
 
 func _ready():
-	var new_scene = game_scene.instantiate()
-	add_child(new_scene)
+	start_game()
 
 func _on_child_exiting_tree(node):
 	if node is GameScene:
 		queue_free()
 		Scene.scene = null
+		
+func start_game():
+	var new_scene = game_scene.instantiate()
+	add_child(new_scene)
