@@ -12,14 +12,17 @@ enum Role { NONE, HOST, CLIENT }
 @export var host_button: Button
 @export var join_button: Button
 @export var force_relay_check: CheckBox
+@export var close_button: Button
 
 var role = Role.NONE
 
 func _ready():
+	connect_ui = get_parent()
 	noray_connect_button.button_up.connect(_connect_to_noray)
 	noray_disconnect_button.button_up.connect(_disconnect_from_noray)
 	host_button.button_up.connect(_host)
 	join_button.button_up.connect(_join)
+	close_button.button_up.connect(_close)
 	
 	Noray.on_oid.connect(func(oid): oid_input.text = oid)
 	Noray.on_connect_nat.connect(_handle_connect_nat)
@@ -88,7 +91,7 @@ func _host():
 	get_tree().get_multiplayer().server_relay = true
 	
 	role = Role.HOST
-	connect_ui.hide()
+	_close()
 	# NOTE: This is not needed when using NetworkEvents
 	# However, this script also runs in multiplayer-simple where NetworkEvents
 	# are assumed to be absent, hence starting NetworkTime manually
@@ -163,7 +166,7 @@ func _handle_connect(address: String, port: int) -> Error:
 			get_tree().get_multiplayer().multiplayer_peer = null
 			return ERR_CANT_CONNECT
 		
-		connect_ui.hide()
+		_close()
 		# NOTE: This is not needed when using NetworkEvents
 		# However, this script also runs in multiplayer-simple where NetworkEvents
 		# are assumed to be absent, hence starting NetworkTime manually
@@ -181,3 +184,6 @@ func _handle_connect(address: String, port: int) -> Error:
 		print("Handshake to %s:%s concluded" % [address, port])
 
 	return err
+
+func _close():
+	connect_ui.hide()

@@ -6,10 +6,13 @@ extends Node
 @export var port_input: LineEdit
 @export var host_button: Button
 @export var join_button: Button
+@export var close_button: Button
 
 func _ready():
+	connect_ui = get_parent()
 	join_button.button_up.connect(_join)
 	host_button.button_up.connect(_host)
+	close_button.button_up.connect(_close)
 
 func _host():
 	var host = _parse_input()
@@ -77,7 +80,7 @@ func _join():
 		return
 
 	print("Client started")
-	connect_ui.hide()
+	_close()
 	
 	# NOTE: This is not needed when using NetworkEvents
 	# However, this script also runs in multiplayer-simple where NetworkEvents
@@ -102,3 +105,7 @@ func _parse_input() -> Dictionary:
 		"address": address,
 		"port": port
 	}
+
+func _close():
+	connect_ui.hide()
+	
