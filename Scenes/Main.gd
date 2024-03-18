@@ -2,45 +2,46 @@ extends Node2D
 class_name MainRoot
 
 @export var game_manager: GameManager
-var is_paused: bool = true
-var game_started: bool = false
 @export var start_button: Button
 @export var menu_label: Label
+@export var oid_label: Label
+@export var main_menu: CanvasLayer
 
-func hide_start_button(hide = true):
-	if hide:
-		start_button.hide()
-	else:
-		start_button.show()
+var game_started: bool = false
+var oid: String
+var network_mode: int = 0
 
 func game_start(start = true):
-	if start:
-		menu_label.text = "Paused"
-	else:
-		menu_label.text = "Magic Highschool P.E."
 	game_started = start
-	
-	
+	if game_started:
+		main_menu.hide()
+	else:
+		main_menu.show()
+		
+		
 func _ready():
-	get_tree().paused = true
+	change_oid()
 	menu_label.text = "Magic Highschool P.E."
 
 func _unhandled_key_input(event):
 	if event.is_action_released("ui_cancel") and game_started:
-		toggle_pause()
-
-func toggle_pause(toggle_to = null):
-	if toggle_to:
-		get_tree().paused = toggle_to
-		is_paused = toggle_to
-	else:
-		get_tree().paused = not get_tree().paused
-		is_paused = get_tree().paused
-	print("GameManager: Pause is toggled to ", is_paused)
-
+		pass
 
 func _on_quit_pressed():
 	if game_started:
 		get_node("GameManager").get_child(0).queue_free()
 	else:
 		get_tree().free()
+
+func _on_option_button_item_selected(index):
+	network_mode = index
+
+func change_oid(new_oid = ""):
+	oid = new_oid
+	oid_label.text = "OID: %s" % oid
+	
+func _join_oid_changed(new_oid):
+	if new_oid:
+		start_button.text = "Join Game"
+	else:
+		start_button.text = "Host Game"

@@ -20,13 +20,10 @@ func create_character_select_instance():
 func _on_start_pressed():
 	print("GameManager: Start Button Pressed")
 	create_character_select_instance()
-	get_parent().toggle_pause(false)
 	get_parent().game_start()
-	get_parent().hide_start_button()
 
 
 func _on_child_exiting_tree(node):
 	if node is GameInstance:
 		get_parent().hide_start_button(false)
-		get_parent().toggle_pause(true)
 		get_parent().game_start(false)
